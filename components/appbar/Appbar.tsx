@@ -21,7 +21,7 @@ export default function Appbar() {
         <Ionicons name="chevron-down" style={styles.icon} />
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.select}
+        style={[styles.select, { maxWidth: "30%" }]}
         onPress={() => bottomSheetRef.current?.present()}
       >
         <Ionicons name="time-outline" style={styles.icon} />
@@ -68,5 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 4,
+    // padding: 16,
+    // margin: -16,
   },
 });

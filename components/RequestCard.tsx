@@ -33,7 +33,7 @@ export default function RequestCard() {
           >
             2 hrs ago
             </Text> */}
-          <Chip
+          {/* <Chip
             style={{
               backgroundColor: "#15e51565",
               paddingHorizontal: 8,
@@ -44,14 +44,61 @@ export default function RequestCard() {
             }}
           >
             Breakfast
-          </Chip>
+          </Chip> */}
+          <View style={{ marginLeft: "auto" }}>
+            <TODChip />
+          </View>
         </View>
       </View>
     </View>
   );
 }
 
-const TODChip = () => {};
+const TOD = {
+  earlyBreakfast: {
+    label: "Early Breakfast",
+    color: "#00e6c4",
+  },
+  breakfast: {
+    label: "Breakfast",
+    color: "#00e6c4",
+  },
+  lunch: {
+    label: "Lunch",
+    color: "#00e6c4",
+  },
+  snacks: {
+    label: "Snacks",
+    color: "#00e6c4",
+  },
+  dinner: {
+    label: "Dinner",
+    color: "#00e6c4",
+  },
+  allDay: {
+    label: "All Day",
+    color: "#00e6c4",
+  },
+};
+
+const TODChip = () => {
+  return (
+    <Chip
+      style={{
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 8,
+        marginTop: 8,
+        fontSize: 10,
+        borderColor: TOD.breakfast.color,
+        color: TOD.breakfast.color,
+        backgroundColor: "#00e6c440",
+      }}
+    >
+      {TOD.earlyBreakfast.label}
+    </Chip>
+  );
+};
 
 const styles = StyleSheet.create({
   counterText: {
@@ -68,5 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "600",
     color: Colors.dark.text,
+    marginLeft: "auto",
   },
 });

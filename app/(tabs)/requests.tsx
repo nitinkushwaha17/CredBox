@@ -41,10 +41,10 @@ export default function requests() {
             </Chip>
           ))}
         </ScrollView>
-        <Ionicons
+        {/* <Ionicons
           name="filter-outline"
           style={{ color: "white", fontSize: 16 }}
-        />
+        /> */}
       </View>
       <ScrollView contentContainerStyle={{ gap: 8, marginTop: 16 }}>
         <RequestCard />

@@ -14,7 +14,10 @@ const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
   props,
   ref
 ) {
-  const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
+  const snapPoints = useMemo(
+    () => (props.snapPoints ? props.snapPoints : ["25%", "50%", "90%"]),
+    [props.snapPoints]
+  );
 
   const renderBackdrop = useCallback(
     (props: any) => (
@@ -50,15 +53,17 @@ const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
       enablePanDownToClose
       backgroundStyle={{ backgroundColor: "#1e1e1e" }}
       handleIndicatorStyle={{ backgroundColor: "white" }}
+      keyboardBehavior="interactive"
+      keyboardBlurBehavior="restore"
     >
       <View>
-        <Text>Awesome 🔥</Text>
+        {/* <Text>Awesome 🔥</Text>
         <QRCode
           value="153235"
           backgroundColor="#1e1e1e"
           color="white"
           size={150}
-        />
+        /> */}
         {props.children}
       </View>
     </BottomSheetModal>

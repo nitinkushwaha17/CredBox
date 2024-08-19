@@ -1,24 +1,31 @@
+import RequestsBS from "@/components/bottom_sheet/RequestsBS";
+import CBBottomSheet from "@/components/CBBottomSheet";
 import Chip from "@/components/Chip";
 import RequestCard from "@/components/RequestCard";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { useCallback, useRef, useState } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-let initialCheckedArray = [true, false, false];
-let Options = ["All", "Accepted by me", "Completed by me"];
+const initialCheckedArray = [true, false, false];
+const Options = ["All", "Accepted by me", "Completed by me"];
+const snapPoints = ["25%", "50%"];
 
 export default function requests() {
   const [checked, setChecked] = useState<boolean[]>(initialCheckedArray);
+  const bsref = useRef(null);
 
-  const setChip = (idx: number) => {
-    let newChecked = [...checked];
-    newChecked[idx] = !newChecked[idx];
-    for (let i = 0; i < newChecked.length; i++) {
-      if (i !== idx) newChecked[i] = false;
-    }
-    if (!newChecked[idx]) newChecked[0] = true;
-    setChecked(newChecked);
-  };
+  const setChip = useCallback(
+    (idx: number) => {
+      let newChecked = [...checked];
+      newChecked[idx] = !newChecked[idx];
+      for (let i = 0; i < newChecked.length; i++) {
+        if (i !== idx) newChecked[i] = false;
+      }
+      if (!newChecked[idx]) newChecked[0] = true;
+      setChecked(newChecked);
+    },
+    [checked]
+  );
 
   return (
     <View style={{ padding: 16 }}>
@@ -41,10 +48,13 @@ export default function requests() {
             </Chip>
           ))}
         </ScrollView>
-        {/* <Ionicons
+        <Ionicons
           name="filter-outline"
           style={{ color: "white", fontSize: 16 }}
-        /> */}
+          onPress={() => {
+            bsref.current.present();
+          }}
+        />
       </View>
       <ScrollView contentContainerStyle={{ gap: 8, marginTop: 16 }}>
         <RequestCard />
@@ -67,6 +77,9 @@ export default function requests() {
         <RequestCard />
         <View style={{ height: 200 }} />
       </ScrollView>
+      <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
+        <RequestsBS />
+      </CBBottomSheet>
     </View>
   );
 }

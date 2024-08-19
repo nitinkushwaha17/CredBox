@@ -39,6 +39,12 @@ export default function RequestsBS() {
           {disabled && <ActivityIndicator color={"white"} />}
           <Text style={styles.buttonText}>Submit</Text>
         </Pressable>
+        {disabled && (
+          <Pressable style={styles.button}>
+            {/* <ActivityIndicator color={"white"} /> */}
+            <Text style={styles.buttonText}>Accept</Text>
+          </Pressable>
+        )}
       </View>
     </View>
   );

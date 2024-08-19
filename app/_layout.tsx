@@ -6,10 +6,8 @@ import {
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useEffect } from "react";
 import "react-native-reanimated";
-import { Text } from "react-native";
-
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CBBottomSheet from "@/components/CBBottomSheet";
@@ -50,7 +48,6 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
-          <CBBottomSheet />
         </ThemeProvider>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

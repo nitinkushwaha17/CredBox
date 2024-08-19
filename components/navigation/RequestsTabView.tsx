@@ -1,5 +1,11 @@
 import * as React from "react";
-import { View, useWindowDimensions, StyleSheet, Text } from "react-native";
+import {
+  View,
+  useWindowDimensions,
+  StyleSheet,
+  Text,
+  Pressable,
+} from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import AllRequestsTab from "../allRequestsTab";
 import OrderCard from "../OrderCard";
@@ -25,13 +31,12 @@ export default function RequestsTabView() {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      // sceneContainerStyle={{ backgroundColor: "gray" }}
-      renderTabBar={() => tabs(index)}
+      renderTabBar={() => <Tabs activeIndex={index} onChange={setIndex} />}
     />
   );
 }
 
-function tabs(activeIndex: number) {
+function Tabs({ activeIndex, onChange }: any) {
   return (
     <View
       style={{
@@ -44,15 +49,16 @@ function tabs(activeIndex: number) {
       }}
     >
       {routes.map((route, idx) => (
-        <View
+        <Pressable
           key={route.key}
           style={[
             styles.tabsTextContainer,
             activeIndex === idx ? styles.tab_active : null,
           ]}
+          onPress={() => onChange(idx)}
         >
           <Text style={styles.tabsText}>{route.title}</Text>
-        </View>
+        </Pressable>
       ))}
     </View>
   );

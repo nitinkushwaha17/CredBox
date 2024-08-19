@@ -2,17 +2,37 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Colors } from "@/constants/Colors";
 import Chip from "./Chip";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RequestCard() {
   return (
     <View
       style={{
-        borderWidth: 1,
-        borderBottomColor: "gray",
-        borderRadius: 8,
-        padding: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: "rgb(50, 50, 50)",
+        // borderRadius: 8,
+        padding: 16,
       }}
     >
+      <View
+        style={{
+          marginBottom: 8,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <StatusChip status="completed" />
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+          <Ionicons
+            style={{ color: "#e5e566", fontSize: 12 }}
+            name="time-outline"
+          />
+          <Text style={{ color: "#e5e566", fontWeight: "600", fontSize: 12 }}>
+            3:55
+          </Text>
+        </View>
+      </View>
       <View
         style={{
           flexDirection: "row",
@@ -85,17 +105,38 @@ const TODChip = () => {
   return (
     <Chip
       style={{
-        paddingHorizontal: 8,
-        paddingVertical: 4,
+        paddingHorizontal: 0,
+        paddingVertical: 0,
         borderRadius: 8,
-        marginTop: 8,
-        fontSize: 10,
-        borderColor: TOD.breakfast.color,
+        // marginTop: 4,
+        fontSize: 12,
+        // borderColor: TOD.breakfast.color,
+        borderWidth: 0,
         color: TOD.breakfast.color,
-        backgroundColor: "#00e6c440",
+        fontWeight: "400",
+        // backgroundColor: "#00e6c440",
       }}
     >
       {TOD.earlyBreakfast.label}
+    </Chip>
+  );
+};
+
+const StatusChip = ({ status }: { status: string }) => {
+  return (
+    <Chip
+      style={{
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 8,
+        fontSize: 10,
+        // borderColor: "#e5e566",
+        color: status === "inProcess" ? "#e5e566" : "#00e6c4",
+        backgroundColor: status === "inProcess" ? "#e5e56640" : "#00e6c440",
+        borderWidth: 0,
+      }}
+    >
+      {status === "inProcess" ? "In Process" : "Completed"}
     </Chip>
   );
 };
@@ -112,7 +153,7 @@ const styles = StyleSheet.create({
     color: Colors.dark.text,
   },
   amountText: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "600",
     color: Colors.dark.text,
     marginLeft: "auto",

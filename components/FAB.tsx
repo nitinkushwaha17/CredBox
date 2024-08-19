@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 export default function FAB() {
   return (
     <Pressable style={styles.container}>
-      <Ionicons name="add-outline" style={styles.title} />
+      <Ionicons name="add-outline" style={styles.icon} />
     </Pressable>
   );
 }
@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 16,
     right: 16,
-    backgroundColor: Colors.light.tint,
+    backgroundColor: Colors.dark.primary,
     paddingHorizontal: 16,
     paddingVertical: 16,
   },
-  title: {
+  icon: {
     fontSize: 24,
-    color: Colors.dark.tint,
+    color: Colors.dark.text,
     fontWeight: "bold",
   },
 });

@@ -50,14 +50,19 @@ export default function requests() {
         </ScrollView>
         <Ionicons
           name="filter-outline"
-          style={{ color: "white", fontSize: 16 }}
-          onPress={() => {
-            bsref.current.present();
+          style={{
+            color: "white",
+            fontSize: 16,
+            padding: 8,
           }}
         />
       </View>
       <ScrollView contentContainerStyle={{ gap: 8, marginTop: 16 }}>
-        <RequestCard />
+        <RequestCard
+          onPress={() => {
+            bsref.current.present();
+          }}
+        />
         <RequestCard />
         <RequestCard />
         <RequestCard />

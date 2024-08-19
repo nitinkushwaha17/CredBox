@@ -1,18 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import { Colors } from "@/constants/Colors";
 import Chip from "./Chip";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function RequestCard() {
+export default function RequestCard({ onPress }: PressableProps) {
   return (
-    <View
+    <Pressable
       style={{
         borderBottomWidth: 1,
         borderBottomColor: "rgb(50, 50, 50)",
         // borderRadius: 8,
         padding: 16,
       }}
+      onPress={onPress}
     >
       <View
         style={{
@@ -70,7 +77,7 @@ export default function RequestCard() {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

@@ -70,10 +70,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     height: "100%",
+    borderBottomWidth: 2,
+    borderBottomColor: "transparent",
   },
   tab_active: {
     borderBottomColor: "white",
-    borderBottomWidth: 2,
   },
   tabsText: {
     color: Colors.dark.text,

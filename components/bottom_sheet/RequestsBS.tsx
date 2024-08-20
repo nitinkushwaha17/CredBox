@@ -3,12 +3,14 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import RequestCard from "../RequestCard";
 import { Colors } from "@/constants/Colors";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { useCallback, useRef, useState } from "react";
+import CBButton from "../CBButton";
 
 export default function RequestsBS() {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -33,18 +35,10 @@ export default function RequestsBS() {
             onChangeText={setPin}
           />
         </View>
-        <Pressable
-          style={[styles.button, disabled ? styles.button_disabled : null]}
-        >
-          {disabled && <ActivityIndicator color={"white"} />}
-          <Text style={styles.buttonText}>Submit</Text>
-        </Pressable>
-        {disabled && (
-          <Pressable style={styles.button}>
-            {/* <ActivityIndicator color={"white"} /> */}
-            <Text style={styles.buttonText}>Accept</Text>
-          </Pressable>
-        )}
+        <CBButton disabled={disabled} loading={disabled}>
+          Submit
+        </CBButton>
+        {disabled && <CBButton>Accept</CBButton>}
       </View>
     </View>
   );
@@ -65,21 +59,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
     letterSpacing: 8,
     fontWeight: "500",
-  },
-  button: {
-    flexDirection: "row",
-    gap: 8,
-    justifyContent: "center",
-    backgroundColor: Colors.dark.primary,
-    padding: 12,
-    borderRadius: 8,
-  },
-  button_disabled: {
-    opacity: 0.5,
-  },
-  buttonText: {
-    color: Colors.dark.text,
-    fontSize: 16,
-    fontWeight: "600",
   },
 });

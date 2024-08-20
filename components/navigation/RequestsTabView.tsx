@@ -10,10 +10,11 @@ import { TabView, SceneMap } from "react-native-tab-view";
 import AllRequestsTab from "../allRequestsTab";
 import OrderCard from "../OrderCard";
 import { Colors } from "@/constants/Colors";
+import MyRequestsTab from "../MyRequestsTab";
 
 const renderScene = SceneMap({
   first: AllRequestsTab,
-  second: OrderCard,
+  second: MyRequestsTab,
 });
 
 const routes = [

@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   View,
   useWindowDimensions,
@@ -6,25 +5,21 @@ import {
   Text,
   Pressable,
 } from "react-native";
-import { TabView, SceneMap } from "react-native-tab-view";
-import AllRequestsTab from "../allRequestsTab";
-import OrderCard from "../OrderCard";
+import { TabView, Route } from "react-native-tab-view";
 import { Colors } from "@/constants/Colors";
-import MyRequestsTab from "../MyRequestsTab";
+import { useState } from "react";
 
-const renderScene = SceneMap({
-  first: AllRequestsTab,
-  second: MyRequestsTab,
-});
+interface RequestTabViewProps {
+  routes: Route[];
+  renderScene: () => React.ReactNode;
+}
 
-const routes = [
-  { key: "first", title: "All" },
-  { key: "second", title: "My" },
-];
-
-export default function RequestsTabView() {
+export default function RequestsTabView({
+  routes,
+  renderScene,
+}: RequestTabViewProps) {
   const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = useState(0);
 
   return (
     <TabView
@@ -32,12 +27,20 @@ export default function RequestsTabView() {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
-      renderTabBar={() => <Tabs activeIndex={index} onChange={setIndex} />}
+      renderTabBar={() => (
+        <Tabs activeIndex={index} onChange={setIndex} routes={routes} />
+      )}
     />
   );
 }
 
-function Tabs({ activeIndex, onChange }: any) {
+interface TabsProps {
+  activeIndex: number;
+  onChange: (index: number) => void;
+  routes: Route[];
+}
+
+function Tabs({ activeIndex, onChange, routes }: TabsProps) {
   return (
     <View
       style={{

@@ -5,13 +5,13 @@ import {
   Text,
   Pressable,
 } from "react-native";
-import { TabView, Route } from "react-native-tab-view";
+import { TabView, Route, SceneRendererProps } from "react-native-tab-view";
 import { Colors } from "@/constants/Colors";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 interface RequestTabViewProps {
   routes: Route[];
-  renderScene: () => React.ReactNode;
+  renderScene: (props: SceneRendererProps & { route: Route }) => ReactNode;
 }
 
 export default function RequestsTabView({

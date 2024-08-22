@@ -3,18 +3,19 @@ import RequestCard from "./RequestCard";
 import RequestsBS from "./bottom_sheet/RequestsBS";
 import CBBottomSheet from "./CBBottomSheet";
 import { useRef } from "react";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 const snapPoints = ["25%", "50%"];
 
 export default function MyRequestsTab() {
-  const bsref = useRef(null);
+  const bsref = useRef<BottomSheetModal>(null);
 
   return (
     <View style={{ padding: 16 }}>
       <ScrollView contentContainerStyle={{ gap: 8, marginTop: 16 }}>
         <RequestCard
           onPress={() => {
-            bsref.current.present();
+            bsref.current?.present();
           }}
         />
         <RequestCard />

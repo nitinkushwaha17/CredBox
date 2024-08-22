@@ -3,6 +3,7 @@ import CBBottomSheet from "@/components/CBBottomSheet";
 import Chip from "@/components/Chip";
 import RequestCard from "@/components/RequestCard";
 import { Ionicons } from "@expo/vector-icons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useCallback, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
@@ -12,7 +13,7 @@ const snapPoints = ["25%", "50%"];
 
 export default function AllRequestsTab() {
   const [checked, setChecked] = useState<boolean[]>(initialCheckedArray);
-  const bsref = useRef(null);
+  const bsref = useRef<BottomSheetModal>(null);
 
   const setChip = useCallback(
     (idx: number) => {
@@ -60,7 +61,7 @@ export default function AllRequestsTab() {
       <ScrollView contentContainerStyle={{ gap: 8, marginTop: 16 }}>
         <RequestCard
           onPress={() => {
-            bsref.current.present();
+            bsref.current?.present();
           }}
         />
         <RequestCard />

@@ -6,7 +6,6 @@ import {
   useBottomSheetModal,
 } from "@gorhom/bottom-sheet";
 import { useMemo, useCallback, forwardRef, useEffect } from "react";
-import QRCode from "react-native-qrcode-svg";
 
 export type Ref = BottomSheetModal;
 
@@ -56,16 +55,7 @@ const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
       keyboardBehavior="interactive"
       keyboardBlurBehavior="restore"
     >
-      <View>
-        {/* <Text>Awesome 🔥</Text>
-        <QRCode
-          value="153235"
-          backgroundColor="#1e1e1e"
-          color="white"
-          size={150}
-        /> */}
-        {props.children}
-      </View>
+      <View>{props.children}</View>
     </BottomSheetModal>
   );
 });

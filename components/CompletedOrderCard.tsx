@@ -1,10 +1,16 @@
 import { Colors } from "@/constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import CompletedOrderBS from "./bottom_sheet/CompletedOrderBS";
+import CBBottomSheet from "./CBBottomSheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useRef } from "react";
+
+const snapPoints = ["25%", "50%"];
 
 export default function CompletedOrderCard() {
+  const bsref = useRef<BottomSheetModal>(null);
   return (
-    <View style={styles.box}>
+    <Pressable style={styles.box} onPress={() => bsref.current?.present()}>
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View>
           <Text style={[styles.counterText, { fontSize: 8 }]}>2 hrs ago</Text>
@@ -21,7 +27,10 @@ export default function CompletedOrderCard() {
           <Text style={styles.amountText}>Rs. 100.00</Text>
         </View>
       </View>
-    </View>
+      <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
+        <CompletedOrderBS />
+      </CBBottomSheet>
+    </Pressable>
   );
 }
 

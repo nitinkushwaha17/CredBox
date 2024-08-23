@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Appbar from "@/components/appbar/Appbar";
 import OrderCard from "@/components/OrderCard";
@@ -75,9 +69,7 @@ export default function Home() {
             horizontal
             contentContainerStyle={styles.contentContainer}
           >
-            <Link href="/orderInfo">
-              <CompletedOrderCard />
-            </Link>
+            <CompletedOrderCard />
             <CompletedOrderCard />
             <CompletedOrderCard />
             <CompletedOrderCard />

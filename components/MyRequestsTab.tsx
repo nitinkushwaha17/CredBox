@@ -1,9 +1,9 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import RequestCard from "./RequestCard";
-import RequestsBS from "./bottom_sheet/RequestsBS";
 import CBBottomSheet from "./CBBottomSheet";
 import { useRef } from "react";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import CompletedOrderBS from "./bottom_sheet/CompletedOrderBS";
 
 const snapPoints = ["25%", "50%"];
 
@@ -39,7 +39,7 @@ export default function MyRequestsTab() {
       </ScrollView>
 
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <RequestsBS />
+        <CompletedOrderBS />
       </CBBottomSheet>
     </View>
   );

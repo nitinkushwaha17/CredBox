@@ -1,10 +1,23 @@
 import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import CBBottomSheet from "./CBBottomSheet";
+import OrderBS from "./bottom_sheet/OrderBS";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useRef } from "react";
+
+const snapPoints = ["25%", "50%"];
 
 export default function OrderCard() {
+  const bsref = useRef<BottomSheetModal>(null);
   return (
-    <View style={styles.box}>
+    <Pressable style={styles.box} onPress={() => bsref.current?.present()}>
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View>
           <Text style={styles.counterText}>Meal O Pedia</Text>
@@ -18,12 +31,18 @@ export default function OrderCard() {
           }}
         >
           <Text style={styles.amountText}>Rs. 100.00</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => bsref.current?.present()}
+          >
             <Ionicons name="add" style={styles.icon} />
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+      <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
+        <OrderBS />
+      </CBBottomSheet>
+    </Pressable>
   );
 }
 

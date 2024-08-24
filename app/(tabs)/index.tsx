@@ -21,9 +21,7 @@ export default function Home() {
             horizontal
             contentContainerStyle={styles.contentContainer}
           >
-            <Link href="/orderInfo">
-              <OrderCard />
-            </Link>
+            <OrderCard />
             <OrderCard />
             <OrderCard />
             <OrderCard />

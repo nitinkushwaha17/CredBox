@@ -1,4 +1,4 @@
-import AllRequestsTab from "@/components/allRequestsTab";
+import AllRequestsTab from "@/components/AllRequestsTab";
 import MyRequestsTab from "@/components/MyRequestsTab";
 import RequestsTabView from "@/components/navigation/RequestsTabView";
 import { SceneMap } from "react-native-tab-view";

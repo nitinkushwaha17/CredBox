@@ -59,11 +59,7 @@ export default function AllRequestsTab() {
         />
       </View>
       <ScrollView contentContainerStyle={{ gap: 8, marginTop: 16 }}>
-        <RequestCard
-          onPress={() => {
-            bsref.current?.present();
-          }}
-        />
+        <RequestCard />
         <RequestCard />
         <RequestCard />
         <RequestCard />

@@ -3,6 +3,7 @@ import RequestCard from "../RequestCard";
 import QRCode from "react-native-qrcode-svg";
 import { Colors } from "@/constants/Colors";
 import CBButton from "../CBButton";
+import OrderInfoCard from "../OrderInfoCard";
 
 export interface MyOrderBSProps {
   status?: "new" | "in-process" | "completed";
@@ -11,7 +12,7 @@ export interface MyOrderBSProps {
 export default function MyOrderBS({ status = "new" }: MyOrderBSProps) {
   return (
     <View>
-      <RequestCard />
+      <OrderInfoCard />
       {status === "completed" ? (
         <>
           <View style={styles.qrContainer}>

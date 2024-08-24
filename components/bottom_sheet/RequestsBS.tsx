@@ -11,6 +11,7 @@ import { Colors } from "@/constants/Colors";
 import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { useCallback, useRef, useState } from "react";
 import CBButton from "../CBButton";
+import OrderInfoCard from "../OrderInfoCard";
 
 export default function RequestsBS() {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -22,7 +23,7 @@ export default function RequestsBS() {
 
   return (
     <View>
-      <RequestCard />
+      <OrderInfoCard />
       <View style={{ marginTop: 16, padding: 16, gap: 16 }}>
         <View style={{ gap: 8 }}>
           <Text style={styles.text}>Order PIN</Text>

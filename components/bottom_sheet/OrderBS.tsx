@@ -1,10 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import RequestCard from "../RequestCard";
 import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import CBButton from "../CBButton";
 import { useState } from "react";
+import OrderInfoCard from "../OrderInfoCard";
 
 export default function OrderBS() {
   const [qty, setQty] = useState<string>("1");
@@ -21,7 +20,7 @@ export default function OrderBS() {
 
   return (
     <View>
-      <RequestCard />
+      <OrderInfoCard />
       <View style={{ padding: 16, gap: 16 }}>
         <View style={styles.qtyContainer}>
           <Text style={styles.text}>Order Quantity: </Text>

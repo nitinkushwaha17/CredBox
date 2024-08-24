@@ -22,9 +22,8 @@ const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
     (props: any) => (
       <BottomSheetBackdrop
         {...props}
-        // disappearsOnIndex={1}
-        // appearsOnIndex={2}
-        // pressBehavior="close"
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
       />
     ),
     []

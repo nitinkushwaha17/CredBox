@@ -1,9 +1,9 @@
 import { Colors } from "@/constants/Colors";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import CompletedOrderBS from "./bottom_sheet/CompletedOrderBS";
 import CBBottomSheet from "./CBBottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useRef } from "react";
+import MyOrderBS from "./bottom_sheet/MyOrderBS";
 
 const snapPoints = ["25%", "50%"];
 
@@ -28,7 +28,7 @@ export default function CompletedOrderCard() {
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <CompletedOrderBS />
+        <MyOrderBS status="completed" />
       </CBBottomSheet>
     </Pressable>
   );

@@ -5,12 +5,19 @@ import {
   Text,
   View,
 } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import { Colors } from "@/constants/Colors";
 import Chip from "./Chip";
 import { Ionicons } from "@expo/vector-icons";
+import CBBottomSheet from "./CBBottomSheet";
+import MyOrderBS, { MyOrderBSProps } from "./bottom_sheet/MyOrderBS";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
-export default function RequestCard({ onPress }: PressableProps) {
+const snapPoints = ["25%", "50%"];
+
+export default function RequestCard({ status }: MyOrderBSProps) {
+  const bsref = useRef<BottomSheetModal>(null);
+
   return (
     <Pressable
       style={{
@@ -19,7 +26,7 @@ export default function RequestCard({ onPress }: PressableProps) {
         // borderRadius: 8,
         padding: 16,
       }}
-      onPress={onPress}
+      onPress={() => bsref.current?.present()}
     >
       <View
         style={{
@@ -77,6 +84,9 @@ export default function RequestCard({ onPress }: PressableProps) {
           </View>
         </View>
       </View>
+      <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
+        <MyOrderBS status={status} />
+      </CBBottomSheet>
     </Pressable>
   );
 }

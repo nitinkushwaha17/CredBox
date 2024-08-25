@@ -50,7 +50,7 @@ function ItemCard({ item }: ItemCardProps) {
         justifyContent: "space-between",
         alignItems: "center",
         paddingHorizontal: 16,
-        paddingVertical: 24,
+        paddingVertical: 48,
         marginHorizontal: 32,
         borderBottomWidth: 1,
         borderBottomColor: "rgb(50, 50, 50)",
@@ -62,7 +62,12 @@ function ItemCard({ item }: ItemCardProps) {
       <Text style={[styles.itemCardText, { flex: 1, flexWrap: "wrap" }]}>
         Veg Buffet
       </Text>
-      <Text style={[styles.itemCardText, { fontWeight: "600", fontSize: 14 }]}>
+      <Text
+        style={[
+          styles.itemCardText,
+          { fontWeight: "600", fontSize: 14, color: "lightblue" },
+        ]}
+      >
         Rs 100.00
       </Text>
 

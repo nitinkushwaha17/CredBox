@@ -6,7 +6,7 @@ import OrderBS from "@/components/bottom_sheet/OrderBS";
 import CBBottomSheet from "@/components/CBBottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
-export default function orderInfo() {
+export default function CounterInfo() {
   const navigation = useNavigation();
 
   useEffect(() => {

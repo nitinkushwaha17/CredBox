@@ -5,7 +5,7 @@ import { Link } from "expo-router";
 
 export default function CounterCard() {
   return (
-    <Link href="/CounterInfo">
+    <Link href="/counterInfo">
       <View style={styles.box}>
         <Image source={ReactLogo} style={{ height: 50, width: 50 }} />
         <View style={{ marginLeft: 12 }}>

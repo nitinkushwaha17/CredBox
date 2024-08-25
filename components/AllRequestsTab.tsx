@@ -4,6 +4,7 @@ import Chip from "@/components/Chip";
 import RequestCard from "@/components/RequestCard";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { TabActions } from "@react-navigation/native";
 import { useCallback, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 

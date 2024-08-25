@@ -7,17 +7,19 @@ import {
 } from "react-native";
 import { TabView, Route, SceneRendererProps } from "react-native-tab-view";
 import { Colors } from "@/constants/Colors";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface RequestTabViewProps {
   routes: Route[];
   renderScene: (props: SceneRendererProps & { route: Route }) => ReactNode;
+  // tab: "all" | "my";
 }
 
 export default function RequestsTabView({
   routes,
   renderScene,
-}: RequestTabViewProps) {
+}: // tab,
+RequestTabViewProps) {
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
 

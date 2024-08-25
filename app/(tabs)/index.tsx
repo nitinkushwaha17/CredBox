@@ -52,16 +52,17 @@ export default function Home() {
             }}
           >
             <Text style={styles.heading}>Recently Completed</Text>
-            <Link
-              href="/orderInfo"
+            {/* <Link
+              href={{ pathname: "/requests", params: { tab: "my" } }}
               style={{
                 color: "white",
                 textDecorationLine: "underline",
                 fontSize: 12,
+                padding: 8,
               }}
             >
               Show All
-            </Link>
+            </Link> */}
           </View>
           <ScrollView
             horizontal

@@ -12,6 +12,7 @@ export type propTypes = {
   checked?: Boolean;
   setChecked?: React.Dispatch<React.SetStateAction<boolean>>;
   style?: StyleProp<TextStyle>;
+  disabled?: boolean;
   children?: ReactNode;
 };
 
@@ -19,6 +20,7 @@ export default function Chip({
   checked = false,
   setChecked = () => {},
   style = {},
+  disabled,
   children,
 }: propTypes) {
   return (
@@ -27,6 +29,7 @@ export default function Chip({
         flexDirection: "row",
       }}
       onPress={() => setChecked(!checked)}
+      disabled={disabled}
     >
       <Text style={[styles.chip, checked ? styles.chip_active : {}, style]}>
         {children}

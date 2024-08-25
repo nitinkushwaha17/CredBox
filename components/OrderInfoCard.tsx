@@ -129,6 +129,7 @@ const TODChip = () => {
         fontWeight: "400",
         // backgroundColor: "#00e6c440",
       }}
+      disabled
     >
       {TOD.earlyBreakfast.label}
     </Chip>
@@ -148,6 +149,7 @@ const StatusChip = ({ status = "new" }: { status?: string }) => {
         backgroundColor: status === "in-process" ? "#e5e56640" : "#00e6c440",
         borderWidth: 0,
       }}
+      disabled
     >
       {status === "in-process"
         ? "In Process"

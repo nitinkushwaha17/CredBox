@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { TabActions } from "@react-navigation/native";
 import { useCallback, useRef, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 
 const initialCheckedArray = [true, false, false];
 const Options = ["All", "Accepted by me", "Completed by me"];
@@ -15,6 +15,15 @@ const snapPoints = ["25%", "50%"];
 export default function AllRequestsTab() {
   const [checked, setChecked] = useState<boolean[]>(initialCheckedArray);
   const bsref = useRef<BottomSheetModal>(null);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   const setChip = useCallback(
     (idx: number) => {
@@ -59,7 +68,12 @@ export default function AllRequestsTab() {
           }}
         />
       </View>
-      <ScrollView contentContainerStyle={{ gap: 8, marginTop: 16 }}>
+      <ScrollView
+        contentContainerStyle={{ gap: 8, marginTop: 16 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <RequestCard />
         <RequestCard />
         <RequestCard />

@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     backgroundColor: Colors.dark.background,
+    zIndex: 1,
   },
   text: {
     color: "white",

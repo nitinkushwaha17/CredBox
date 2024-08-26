@@ -1,4 +1,10 @@
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Appbar from "@/components/appbar/Appbar";
 import OrderCard from "@/components/OrderCard";
@@ -6,14 +12,27 @@ import CounterCard from "@/components/CounterCard";
 import FAB from "@/components/FAB";
 import { Link } from "expo-router";
 import CompletedOrderCard from "@/components/CompletedOrderCard";
+import { useState, useCallback } from "react";
 
 export default function Home() {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Appbar />
       <ScrollView
         style={{ flex: 1, paddingHorizontal: 16 }}
         contentContainerStyle={{ gap: 32, paddingTop: 24 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         <View>
           <Text style={styles.heading}>Recently Ordered</Text>

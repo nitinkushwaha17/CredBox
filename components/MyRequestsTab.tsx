@@ -19,29 +19,28 @@ export default function MyRequestsTab() {
   }, []);
 
   return (
-    <View style={{ padding: 16 }}>
-      <ScrollView
-        contentContainerStyle={{ gap: 8, marginTop: 16 }}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <RequestCard myOrderCard status="completed" />
-        <RequestCard myOrderCard status="in-process" />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <RequestCard myOrderCard />
-        <View style={{ height: 200 }} />
-      </ScrollView>
-    </View>
+    <ScrollView
+      style={{ paddingHorizontal: 16 }}
+      contentContainerStyle={{ gap: 8, marginTop: 16 }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <RequestCard myOrderCard status="completed" />
+      <RequestCard myOrderCard status="in-process" />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <RequestCard myOrderCard />
+      <View style={{ height: 200 }} />
+    </ScrollView>
   );
 }
 

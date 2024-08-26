@@ -46,6 +46,8 @@ export default function RootLayout() {
         >
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="counterInfo" />
+            <Stack.Screen name="newRequest" />
             <Stack.Screen name="+not-found" />
           </Stack>
         </ThemeProvider>

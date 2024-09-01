@@ -8,8 +8,13 @@ export default function CounterCard() {
     <Link href="/counterInfo">
       <View style={styles.box}>
         <Image
-          source={require("@/assets/images/react-logo.png")}
-          style={{ height: 50, width: 50 }}
+          source={require("@/assets/images/menu.png")}
+          style={{
+            height: 100,
+            width: 125,
+            borderRadius: 8,
+            objectFit: "cover",
+          }}
         />
         <View style={{ marginLeft: 12 }}>
           <Text style={styles.name}>Meal O Pedia</Text>

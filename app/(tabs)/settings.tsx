@@ -1,6 +1,7 @@
-import { StyleSheet, Switch, Text, View } from "react-native";
+import { StatusBar, StyleSheet, Switch, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../_layout";
+import { Colors } from "@/constants/Colors";
 
 export default function Settings() {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -12,6 +13,10 @@ export default function Settings() {
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 16, gap: 32, paddingTop: 24 }}>
+      <StatusBar
+        barStyle={theme === "dark" ? "light-content" : "dark-content"}
+        backgroundColor={Colors[theme ?? "light"].background}
+      />
       <View
         style={{
           flexDirection: "row",

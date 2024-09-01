@@ -6,8 +6,8 @@ import {
   Pressable,
 } from "react-native";
 import { TabView, Route, SceneRendererProps } from "react-native-tab-view";
-import { Colors } from "@/constants/Colors";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
+import { useStyle } from "@/hooks/useStyle";
 
 interface RequestTabViewProps {
   routes: Route[];
@@ -43,17 +43,10 @@ interface TabsProps {
 }
 
 function Tabs({ activeIndex, onChange, routes }: TabsProps) {
+  const styles = useStyle(style);
+
   return (
-    <View
-      style={{
-        width: "100%",
-        backgroundColor: "rgb(18, 18, 18)",
-        height: 50,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <View style={styles.container}>
       {routes.map((route, idx) => (
         <Pressable
           key={route.key}
@@ -70,21 +63,30 @@ function Tabs({ activeIndex, onChange, routes }: TabsProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  tabsTextContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    height: "100%",
-    borderBottomWidth: 2,
-    borderBottomColor: "transparent",
-  },
-  tab_active: {
-    borderBottomColor: "white",
-  },
-  tabsText: {
-    color: Colors.dark.text,
-    fontSize: 16,
-    fontWeight: "600",
-  },
-});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    container: {
+      width: "100%",
+      backgroundColor: Colors.background,
+      height: 50,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    tabsTextContainer: {
+      justifyContent: "center",
+      alignItems: "center",
+      flex: 1,
+      height: "100%",
+      borderBottomWidth: 2,
+      borderBottomColor: "transparent",
+    },
+    tab_active: {
+      borderBottomColor: Colors.text,
+    },
+    tabsText: {
+      color: Colors.text,
+      fontSize: 16,
+      fontWeight: "600",
+    },
+  });

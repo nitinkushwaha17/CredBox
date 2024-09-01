@@ -1,4 +1,5 @@
 import { Colors } from "@/constants/Colors";
+import { useStyle } from "@/hooks/useStyle";
 import { ReactNode, useState } from "react";
 import {
   Pressable,
@@ -23,6 +24,8 @@ export default function Chip({
   disabled,
   children,
 }: propTypes) {
+  const styles = useStyle(chipStyle);
+
   return (
     <Pressable
       style={{
@@ -38,21 +41,22 @@ export default function Chip({
   );
 }
 
-const styles = StyleSheet.create({
-  chip: {
-    color: Colors.dark.text,
-    fontWeight: "600",
-    borderRadius: 8,
-    borderColor: "#2f2f2f",
-    borderWidth: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    fontSize: 12,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  chip_active: {
-    borderColor: Colors.dark.text,
-    backgroundColor: "#2f2f2f",
-  },
-});
+const chipStyle = (Colors: any) =>
+  StyleSheet.create({
+    chip: {
+      color: Colors.text,
+      fontWeight: "600",
+      borderRadius: 8,
+      borderColor: Colors.onBackground,
+      borderWidth: 1,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      fontSize: 12,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    chip_active: {
+      borderColor: Colors.text,
+      backgroundColor: Colors.onBackground,
+    },
+  });

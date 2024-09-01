@@ -6,6 +6,7 @@ import {
   useBottomSheetModal,
 } from "@gorhom/bottom-sheet";
 import { useMemo, useCallback, forwardRef, useEffect } from "react";
+import { useStyle } from "@/hooks/useStyle";
 
 export type Ref = BottomSheetModal;
 
@@ -13,6 +14,7 @@ const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
   props,
   ref
 ) {
+  const styles = useStyle(style);
   const snapPoints = useMemo(
     () => (props.snapPoints ? props.snapPoints : ["25%", "50%", "90%"]),
     [props.snapPoints]
@@ -49,8 +51,8 @@ const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
       snapPoints={snapPoints}
       backdropComponent={renderBackdrop}
       enablePanDownToClose
-      backgroundStyle={{ backgroundColor: "#1e1e1e" }}
-      handleIndicatorStyle={{ backgroundColor: "white" }}
+      backgroundStyle={styles.bsBackgroundStyle}
+      handleIndicatorStyle={styles.bsHandleIndicatorStyle}
       keyboardBehavior="interactive"
       keyboardBlurBehavior="restore"
     >
@@ -59,6 +61,14 @@ const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
   );
 });
 
-const styles = StyleSheet.create({});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    bsBackgroundStyle: {
+      backgroundColor: Colors.background /*"#1e1e1e"*/,
+    },
+    bsHandleIndicatorStyle: {
+      backgroundColor: Colors.icon,
+    },
+  });
 
 export default CBBottomSheet;

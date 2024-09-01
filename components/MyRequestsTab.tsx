@@ -20,8 +20,8 @@ export default function MyRequestsTab() {
 
   return (
     <ScrollView
-      style={{ paddingHorizontal: 16 }}
-      contentContainerStyle={{ gap: 8, marginTop: 16 }}
+      style={{ padding: 16 }}
+      contentContainerStyle={{ gap: 8 }}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }

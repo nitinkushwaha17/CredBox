@@ -51,7 +51,10 @@ export default function AllRequestsTab() {
           alignItems: "center",
         }}
       >
-        <ScrollView horizontal contentContainerStyle={{ gap: 8 }}>
+        <ScrollView
+          horizontal
+          contentContainerStyle={{ gap: 8, paddingBottom: 16 }}
+        >
           {Options.map((option, idx) => (
             <Chip
               key={idx}
@@ -72,7 +75,7 @@ export default function AllRequestsTab() {
         />
       </View>
       <ScrollView
-        contentContainerStyle={{ gap: 8, marginTop: 16 }}
+        contentContainerStyle={{ gap: 8 }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

@@ -37,7 +37,7 @@ const style = (Colors: any) =>
   StyleSheet.create({
     appbar: {
       // borderBottomColor: "grey",
-      borderBottomWidth: 1,
+      // borderBottomWidth: 1,
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",

@@ -12,7 +12,7 @@ export default function Appbar() {
 
   return (
     <View style={styles.appbar}>
-      <CBBottomSheet ref={bottomSheetRef} />
+      <CBBottomSheet ref={bottomSheetRef} children={<></>} />
       <TouchableOpacity
         style={[styles.select, { maxWidth: "60%" }]}
         onPress={() => bottomSheetRef.current?.present()}

@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react";
 import CBBottomSheet from "./CBBottomSheet";
-import MyOrderBS, { MyOrderBSProps } from "./bottom_sheet/MyOrderBS";
+import MyOrderBS, { OrderStatus } from "./bottom_sheet/MyOrderBS";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import OrderInfoCard from "./OrderInfoCard";
 import RequestsBS from "./bottom_sheet/RequestsBS";
@@ -11,7 +11,10 @@ const snapPoints = ["25%", "50%"];
 export default function RequestCard({
   myOrderCard,
   status,
-}: MyOrderBSProps & { myOrderCard?: boolean }) {
+}: {
+  status?: OrderStatus;
+  myOrderCard?: boolean;
+}) {
   const { theme } = useContext(ThemeContext);
   const bsref = useRef<BottomSheetModal>(null);
 

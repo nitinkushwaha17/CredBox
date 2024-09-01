@@ -5,15 +5,15 @@ import {
   BottomSheetProps,
   useBottomSheetModal,
 } from "@gorhom/bottom-sheet";
-import { useMemo, useCallback, forwardRef, useEffect } from "react";
+import { useMemo, useCallback, forwardRef, useEffect, ReactNode } from "react";
 import { useStyle } from "@/hooks/useStyle";
 
 export type Ref = BottomSheetModal;
 
-const CBBottomSheet = forwardRef<Ref, BottomSheetProps>(function CBBottomSheet(
-  props,
-  ref
-) {
+const CBBottomSheet = forwardRef<
+  Ref,
+  BottomSheetProps & { children?: ReactNode }
+>(function CBBottomSheet(props, ref) {
   const styles = useStyle(style);
   const snapPoints = useMemo(
     () => (props.snapPoints ? props.snapPoints : ["25%", "50%", "90%"]),

@@ -5,6 +5,7 @@ import { useNavigation } from "expo-router";
 import OrderBS from "@/components/bottom_sheet/OrderBS";
 import CBBottomSheet from "@/components/CBBottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useStyle } from "@/hooks/useStyle";
 
 export default function CounterInfo() {
   const navigation = useNavigation();
@@ -42,34 +43,18 @@ interface ItemCardProps {
 const snapPoints = ["25%", "50%"];
 
 function ItemCard({ item }: ItemCardProps) {
+  const styles = useStyle(style);
+
   const bsref = useRef<BottomSheetModal>(null);
   return (
     <Pressable
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingHorizontal: 16,
-        paddingVertical: 48,
-        marginHorizontal: 32,
-        borderBottomWidth: 1,
-        borderBottomColor: "rgb(50, 50, 50)",
-        gap: 32,
-        // flex: 1,
-      }}
+      style={styles.cardContainer}
       onPress={() => bsref.current?.present()}
     >
       <Text style={[styles.itemCardText, { flex: 1, flexWrap: "wrap" }]}>
         Veg Buffet
       </Text>
-      <Text
-        style={[
-          styles.itemCardText,
-          { fontWeight: "600", fontSize: 14, color: "lightblue" },
-        ]}
-      >
-        Rs 100.00
-      </Text>
+      <Text style={[styles.itemCardText, styles.priceText]}>Rs 100.00</Text>
 
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
         <OrderBS />
@@ -78,10 +63,28 @@ function ItemCard({ item }: ItemCardProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  itemCardText: {
-    color: Colors.dark.text,
-    fontSize: 16,
-    fontWeight: "400",
-  },
-});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    cardContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingHorizontal: 16,
+      paddingVertical: 48,
+      marginHorizontal: 32,
+      borderBottomWidth: 1,
+      borderBottomColor: Colors.onBackground,
+      gap: 32,
+      // flex: 1,
+    },
+    itemCardText: {
+      color: Colors.text,
+      fontSize: 16,
+      fontWeight: "400",
+    },
+    priceText: {
+      fontWeight: "600",
+      fontSize: 14,
+      color: Colors.primary,
+    },
+  });

@@ -14,6 +14,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[theme ?? "light"].tint,
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarStyle: { height: 60 },
       }}
       sceneContainerStyle={{
         backgroundColor: Colors[theme ?? "light"].background,

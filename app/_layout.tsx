@@ -76,9 +76,7 @@ export default function RootLayout() {
       }}
     >
       <BottomSheetModalProvider>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
+        <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
           <ThemeContext.Provider value={themeData}>
             <Stack>
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

@@ -2,16 +2,16 @@ import { Tabs } from "expo-router";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { Ionicons, Octicons } from "@expo/vector-icons";
+import { useContext } from "react";
+import { ThemeContext } from "../_layout";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { theme } = useContext(ThemeContext);
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: Colors[theme ?? "light"].tint,
         headerShown: false,
         tabBarShowLabel: false,
       }}
@@ -48,6 +48,19 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "code-slash" : "code-slash-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          headerShown: true,
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "settings" : "settings-outline"}
               color={color}
             />
           ),

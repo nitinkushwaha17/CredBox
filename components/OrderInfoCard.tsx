@@ -26,15 +26,7 @@ export default function OrderInfoCard({
   const styles = useStyle(style, theme ?? undefined);
 
   return (
-    <Pressable
-      style={{
-        borderBottomWidth: 1,
-        borderBottomColor: "rgb(50, 50, 50)",
-        // borderRadius: 8,
-        padding: 16,
-      }}
-      onPress={onPress}
-    >
+    <Pressable style={styles.card} onPress={onPress}>
       <View
         style={{
           marginBottom: 8,
@@ -172,6 +164,12 @@ const StatusChip = ({ status = "new" }: { status?: string }) => {
 
 const style = (Colors: any) =>
   StyleSheet.create({
+    card: {
+      borderBottomWidth: 1,
+      borderBottomColor: Colors.onBackground,
+      // borderRadius: 8,
+      padding: 16,
+    },
     counterText: {
       fontSize: 12,
       color: Colors.icon,

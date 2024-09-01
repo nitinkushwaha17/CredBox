@@ -12,8 +12,12 @@ import { BottomSheetTextInput } from "@gorhom/bottom-sheet";
 import { useCallback, useRef, useState } from "react";
 import CBButton from "../CBButton";
 import OrderInfoCard from "../OrderInfoCard";
+import { useStyle } from "@/hooks/useStyle";
+import { themeType } from "@/app/_layout";
 
-export default function RequestsBS() {
+export default function RequestsBS({ theme }: { theme: themeType }) {
+  const styles = useStyle(style, theme);
+
   const [disabled, setDisabled] = useState<boolean>(true);
   const [pin, setPin] = useState<string>("");
 
@@ -45,20 +49,21 @@ export default function RequestsBS() {
   );
 }
 
-const styles = StyleSheet.create({
-  text: {
-    color: Colors.dark.text,
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  input: {
-    color: Colors.dark.text,
-    backgroundColor: "rgb(50, 50, 50)",
-    padding: 16,
-    textAlign: "center",
-    borderRadius: 16,
-    fontSize: 24,
-    letterSpacing: 8,
-    fontWeight: "500",
-  },
-});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    text: {
+      color: Colors.text,
+      fontSize: 16,
+      fontWeight: "600",
+    },
+    input: {
+      color: Colors.text,
+      backgroundColor: Colors.onBackground,
+      padding: 16,
+      textAlign: "center",
+      borderRadius: 16,
+      fontSize: 24,
+      letterSpacing: 8,
+      fontWeight: "500",
+    },
+  });

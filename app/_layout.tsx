@@ -16,7 +16,7 @@ import { Colors } from "@/constants/Colors";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-type themeType = "light" | "dark";
+export type themeType = "light" | "dark";
 
 interface ThemeContextType {
   theme: themeType;

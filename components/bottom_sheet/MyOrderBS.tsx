@@ -4,12 +4,17 @@ import QRCode from "react-native-qrcode-svg";
 import { Colors } from "@/constants/Colors";
 import CBButton from "../CBButton";
 import OrderInfoCard from "../OrderInfoCard";
+import { useStyle } from "@/hooks/useStyle";
 
-export interface MyOrderBSProps {
-  status?: "new" | "in-process" | "completed";
+export type OrderStatus = "new" | "in-process" | "completed";
+interface MyOrderBSProps {
+  status?: OrderStatus;
+  theme: "light" | "dark";
 }
 
-export default function MyOrderBS({ status = "new" }: MyOrderBSProps) {
+export default function MyOrderBS({ status = "new", theme }: MyOrderBSProps) {
+  const styles = useStyle(style, theme);
+
   return (
     <View>
       <OrderInfoCard />
@@ -18,8 +23,8 @@ export default function MyOrderBS({ status = "new" }: MyOrderBSProps) {
           <View style={styles.qrContainer}>
             <QRCode
               value="153235"
-              backgroundColor="#1e1e1e"
-              color="white"
+              backgroundColor={Colors[theme].background}
+              color={Colors[theme].text}
               size={150}
             />
           </View>
@@ -37,16 +42,17 @@ export default function MyOrderBS({ status = "new" }: MyOrderBSProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  qrContainer: {
-    marginHorizontal: "auto",
-    marginVertical: 16,
-  },
-  pinText: {
-    color: Colors.dark.text,
-    fontSize: 16,
-    fontWeight: "bold",
-    marginHorizontal: "auto",
-    letterSpacing: 5,
-  },
-});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    qrContainer: {
+      marginHorizontal: "auto",
+      marginVertical: 16,
+    },
+    pinText: {
+      color: Colors.text,
+      fontSize: 16,
+      fontWeight: "bold",
+      marginHorizontal: "auto",
+      letterSpacing: 5,
+    },
+  });

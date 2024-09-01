@@ -1,4 +1,5 @@
 import {
+  GestureResponderEvent,
   Pressable,
   PressableProps,
   StyleSheet,
@@ -9,12 +10,15 @@ import React, { useRef } from "react";
 import { Colors } from "@/constants/Colors";
 import Chip from "./Chip";
 import { Ionicons } from "@expo/vector-icons";
-import { MyOrderBSProps } from "./bottom_sheet/MyOrderBS";
+import { OrderStatus } from "./bottom_sheet/MyOrderBS";
 
 export default function OrderInfoCard({
   status = "new",
   onPress,
-}: MyOrderBSProps & PressableProps) {
+}: {
+  status?: OrderStatus;
+  onPress?: (event: GestureResponderEvent) => void;
+}) {
   return (
     <Pressable
       style={{

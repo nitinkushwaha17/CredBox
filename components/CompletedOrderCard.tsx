@@ -2,13 +2,15 @@ import { Colors } from "@/constants/Colors";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import CBBottomSheet from "./CBBottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import MyOrderBS from "./bottom_sheet/MyOrderBS";
 import { useStyle } from "@/hooks/useStyle";
+import { ThemeContext } from "@/app/_layout";
 
 const snapPoints = ["25%", "50%"];
 
 export default function CompletedOrderCard() {
+  const { theme } = useContext(ThemeContext);
   const styles = useStyle(style);
   const bsref = useRef<BottomSheetModal>(null);
   return (
@@ -30,7 +32,7 @@ export default function CompletedOrderCard() {
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <MyOrderBS status="completed" />
+        <MyOrderBS status="completed" theme={theme} />
       </CBBottomSheet>
     </Pressable>
   );

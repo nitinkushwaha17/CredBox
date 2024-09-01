@@ -25,6 +25,7 @@ export default function MyRequestsTab() {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
+      showsVerticalScrollIndicator={false}
     >
       <RequestCard myOrderCard status="completed" />
       <RequestCard myOrderCard status="in-process" />

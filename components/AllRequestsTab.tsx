@@ -79,6 +79,7 @@ export default function AllRequestsTab() {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        showsVerticalScrollIndicator={false}
       >
         <RequestCard />
         <RequestCard />

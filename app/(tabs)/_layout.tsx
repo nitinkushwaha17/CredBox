@@ -15,6 +15,9 @@ export default function TabLayout() {
         headerShown: false,
         tabBarShowLabel: false,
       }}
+      sceneContainerStyle={{
+        backgroundColor: Colors[theme ?? "light"].background,
+      }}
     >
       <Tabs.Screen
         name="index"

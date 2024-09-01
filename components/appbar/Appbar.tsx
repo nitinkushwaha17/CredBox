@@ -1,13 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
 import CBBottomSheet from "../CBBottomSheet";
-import { Colors } from "@/constants/Colors";
+import { useStyle } from "@/hooks/useStyle";
 
 export default function Appbar() {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
+
+  const styles = useStyle(style);
 
   return (
     <View style={styles.appbar}>
@@ -32,44 +33,45 @@ export default function Appbar() {
   );
 }
 
-const styles = StyleSheet.create({
-  appbar: {
-    borderBottomColor: "grey",
-    borderBottomWidth: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: Colors.dark.background,
-    zIndex: 1,
-  },
-  text: {
-    color: "white",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  dropdown: {
-    backgroundColor: "transparent",
-    width: 150,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 5,
-  },
-  selectedTextStyle: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  icon: {
-    color: "white",
-    fontSize: 14,
-  },
-  select: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 4,
-    // padding: 16,
-    // margin: -16,
-  },
-});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    appbar: {
+      // borderBottomColor: "grey",
+      borderBottomWidth: 1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      backgroundColor: Colors.background,
+      zIndex: 1,
+    },
+    text: {
+      color: Colors.text,
+      fontSize: 14,
+      fontWeight: "bold",
+    },
+    dropdown: {
+      backgroundColor: "transparent",
+      width: 150,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      borderRadius: 5,
+    },
+    selectedTextStyle: {
+      color: Colors.text,
+      fontWeight: "bold",
+    },
+    icon: {
+      color: Colors.icon,
+      fontSize: 14,
+    },
+    select: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: 4,
+      // padding: 16,
+      // margin: -16,
+    },
+  });

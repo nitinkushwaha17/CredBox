@@ -10,9 +10,12 @@ import { useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { Colors } from "@/constants/Colors";
 import CBButton from "@/components/CBButton";
+import { useStyle } from "@/hooks/useStyle";
 
 export default function newRequest() {
   const navigation = useNavigation();
+
+  const style = useStyle(styles);
 
   useEffect(() => {
     navigation.setOptions({ title: "New Request" });
@@ -30,18 +33,18 @@ export default function newRequest() {
         source={require("@/assets/images/knife-fork.png")}
         style={{ width: 250, height: 250, margin: "auto" }}
       />
-      <View style={styles.inputContainer}>
-        <Text style={styles.heading}>Counter</Text>
-        <TextInput style={styles.input} />
+      <View style={style.inputContainer}>
+        <Text style={style.heading}>Counter</Text>
+        <TextInput style={style.input} />
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.heading}>Item</Text>
-        <TextInput style={styles.input} />
+      <View style={style.inputContainer}>
+        <Text style={style.heading}>Item</Text>
+        <TextInput style={style.input} />
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.heading}>Price</Text>
+      <View style={style.inputContainer}>
+        <Text style={style.heading}>Price</Text>
         <TextInput
-          style={styles.input}
+          style={style.input}
           keyboardType="number-pad"
           maxLength={3}
         />
@@ -51,22 +54,23 @@ export default function newRequest() {
   );
 }
 
-const styles = StyleSheet.create({
-  heading: {
-    fontSize: 18,
-    color: "white",
-    fontWeight: "600",
-  },
-  inputContainer: {
-    gap: 8,
-  },
-  input: {
-    color: Colors.dark.text,
-    backgroundColor: "rgb(20, 20, 20)",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    fontSize: 16,
-    fontWeight: "400",
-  },
-});
+const styles = (Colors: any) =>
+  StyleSheet.create({
+    heading: {
+      fontSize: 18,
+      color: Colors.text,
+      fontWeight: "600",
+    },
+    inputContainer: {
+      gap: 8,
+    },
+    input: {
+      color: Colors.text,
+      backgroundColor: Colors.onBackground,
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      borderRadius: 8,
+      fontSize: 16,
+      fontWeight: "400",
+    },
+  });

@@ -13,9 +13,12 @@ import FAB from "@/components/FAB";
 import { Link } from "expo-router";
 import CompletedOrderCard from "@/components/CompletedOrderCard";
 import { useState, useCallback } from "react";
+import { useStyle } from "@/hooks/useStyle";
 
 export default function Home() {
   const [refreshing, setRefreshing] = useState(false);
+
+  const styles: any = useStyle(style);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -104,23 +107,15 @@ export default function Home() {
   );
 }
 
-const styles = StyleSheet.create({
-  text: {
-    color: "white",
-    fontSize: 32,
-  },
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "grey",
-  },
-  contentContainer: {
-    gap: 12,
-    marginTop: 12,
-  },
-  heading: {
-    fontSize: 18,
-    color: "white",
-    fontWeight: "600",
-  },
-});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    contentContainer: {
+      gap: 12,
+      marginTop: 12,
+    },
+    heading: {
+      fontSize: 18,
+      color: Colors.text,
+      fontWeight: "600",
+    },
+  });

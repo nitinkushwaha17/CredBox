@@ -17,7 +17,7 @@ export default function MyOrderBS({ status = "new", theme }: MyOrderBSProps) {
 
   return (
     <View>
-      <OrderInfoCard />
+      <OrderInfoCard theme={theme} />
       {status === "completed" ? (
         <>
           <View style={styles.qrContainer}>

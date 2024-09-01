@@ -23,7 +23,7 @@ export default function OrderBS({ theme }: any) {
 
   return (
     <View>
-      <OrderInfoCard />
+      <OrderInfoCard theme={theme} />
       <View style={{ padding: 16, gap: 16 }}>
         <View style={styles.qtyContainer}>
           <Text style={styles.text}>Order Quantity: </Text>

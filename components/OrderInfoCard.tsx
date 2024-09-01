@@ -11,14 +11,20 @@ import { Colors } from "@/constants/Colors";
 import Chip from "./Chip";
 import { Ionicons } from "@expo/vector-icons";
 import { OrderStatus } from "./bottom_sheet/MyOrderBS";
+import { useStyle } from "@/hooks/useStyle";
+import { themeType } from "@/app/_layout";
 
 export default function OrderInfoCard({
   status = "new",
   onPress,
+  theme,
 }: {
   status?: OrderStatus;
   onPress?: (event: GestureResponderEvent) => void;
+  theme?: themeType;
 }) {
+  const styles = useStyle(style, theme ?? undefined);
+
   return (
     <Pressable
       style={{
@@ -164,21 +170,22 @@ const StatusChip = ({ status = "new" }: { status?: string }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  counterText: {
-    fontSize: 12,
-    color: Colors.dark.icon,
-    fontWeight: "600",
-  },
-  itemText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: Colors.dark.text,
-  },
-  amountText: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: Colors.dark.text,
-    marginLeft: "auto",
-  },
-});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    counterText: {
+      fontSize: 12,
+      color: Colors.icon,
+      fontWeight: "600",
+    },
+    itemText: {
+      fontSize: 16,
+      fontWeight: "600",
+      color: Colors.text,
+    },
+    amountText: {
+      fontSize: 14,
+      fontWeight: "600",
+      color: Colors.text,
+      marginLeft: "auto",
+    },
+  });

@@ -27,7 +27,7 @@ export default function RequestsBS({ theme }: { theme: themeType }) {
 
   return (
     <View>
-      <OrderInfoCard />
+      <OrderInfoCard theme={theme} />
       <View style={{ marginTop: 16, padding: 16, gap: 16 }}>
         <View style={{ gap: 8 }}>
           <Text style={styles.text}>Order PIN</Text>

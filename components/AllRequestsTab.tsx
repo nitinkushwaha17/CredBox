@@ -3,6 +3,7 @@ import RequestsBS from "@/components/bottom_sheet/RequestsBS";
 import CBBottomSheet from "@/components/CBBottomSheet";
 import Chip from "@/components/Chip";
 import RequestCard from "@/components/RequestCard";
+import { useStyle } from "@/hooks/useStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { TabActions } from "@react-navigation/native";
@@ -14,6 +15,7 @@ const Options = ["All", "Accepted by me", "Completed by me"];
 const snapPoints = ["25%", "50%"];
 
 export default function AllRequestsTab() {
+  const styles = useStyle(style);
   const { theme } = useContext(ThemeContext);
 
   const [checked, setChecked] = useState<boolean[]>(initialCheckedArray);
@@ -65,14 +67,7 @@ export default function AllRequestsTab() {
             </Chip>
           ))}
         </ScrollView>
-        <Ionicons
-          name="filter-outline"
-          style={{
-            color: "white",
-            fontSize: 16,
-            padding: 8,
-          }}
-        />
+        <Ionicons name="filter-outline" style={styles.filterIcon} />
       </View>
       <ScrollView
         contentContainerStyle={{ gap: 8 }}
@@ -108,4 +103,11 @@ export default function AllRequestsTab() {
   );
 }
 
-const styles = StyleSheet.create({});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    filterIcon: {
+      color: Colors.text,
+      fontSize: 16,
+      padding: 8,
+    },
+  });

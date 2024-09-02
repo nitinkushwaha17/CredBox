@@ -11,6 +11,10 @@ export default function Settings() {
     setTheme(darkTheme ? "dark" : "light");
   }, [darkTheme]);
 
+  useEffect(() => {
+    setDarkTheme(theme == "dark");
+  }, [theme]);
+
   return (
     <View style={{ flex: 1, paddingHorizontal: 16, gap: 32, paddingTop: 24 }}>
       <StatusBar

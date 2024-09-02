@@ -24,7 +24,15 @@ export default function Settings() {
           alignItems: "center",
         }}
       >
-        <Text>Dark mode</Text>
+        <Text
+          style={{
+            color: Colors[theme ?? "light"].text,
+            fontWeight: "600",
+            fontSize: 16,
+          }}
+        >
+          Dark mode
+        </Text>
         <Switch
           value={darkTheme}
           onChange={() => setDarkTheme(!darkTheme)}

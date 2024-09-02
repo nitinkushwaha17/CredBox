@@ -44,7 +44,7 @@ export default function AllRequestsTab() {
   );
 
   return (
-    <View style={{ padding: 16 }}>
+    <View style={{ paddingHorizontal: 16 }}>
       <View
         style={{
           flexDirection: "row",
@@ -55,7 +55,10 @@ export default function AllRequestsTab() {
       >
         <ScrollView
           horizontal
-          contentContainerStyle={{ gap: 8, paddingBottom: 16 }}
+          contentContainerStyle={{
+            gap: 8,
+            paddingVertical: 16,
+          }}
         >
           {Options.map((option, idx) => (
             <Chip
@@ -108,6 +111,7 @@ const style = (Colors: any) =>
     filterIcon: {
       color: Colors.text,
       fontSize: 16,
-      padding: 8,
+      paddingVertical: 16,
+      paddingHorizontal: 8,
     },
   });

@@ -30,7 +30,7 @@ const style = (Colors: any) =>
     box: {
       borderRadius: 8,
       flexDirection: "row",
-      padding: 12,
+      paddingVertical: 12,
     },
     name: {
       fontSize: 16,

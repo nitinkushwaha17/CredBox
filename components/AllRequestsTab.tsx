@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/app/_layout";
+import { ThemeContext } from "@/contexts/ThemeContext";
 import RequestsBS from "@/components/bottom_sheet/RequestsBS";
 import CBBottomSheet from "@/components/CBBottomSheet";
 import Chip from "@/components/Chip";

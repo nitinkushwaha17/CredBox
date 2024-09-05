@@ -12,21 +12,15 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { Colors } from "@/constants/Colors";
+import LottieView from "lottie-react-native";
+import { View } from "react-native";
+import Splash from "./splash";
+import { ThemeContext } from "@/contexts/ThemeContext";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export type themeType = "light" | "dark";
-
-interface ThemeContextType {
-  theme: themeType;
-  setTheme: (Color: any) => void;
-}
-
-export const ThemeContext = createContext<ThemeContextType>({
-  theme: "light",
-  setTheme: (Color: any) => {},
-});
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

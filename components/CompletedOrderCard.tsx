@@ -5,7 +5,7 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useContext, useRef } from "react";
 import MyOrderBS from "./bottom_sheet/MyOrderBS";
 import { useStyle } from "@/hooks/useStyle";
-import { ThemeContext } from "@/app/_layout";
+import { ThemeContext } from "@/contexts/ThemeContext";
 
 const snapPoints = ["25%", "50%"];
 

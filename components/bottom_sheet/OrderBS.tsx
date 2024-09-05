@@ -4,7 +4,6 @@ import CBButton from "../CBButton";
 import { useContext, useState } from "react";
 import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
-import { ThemeContext } from "@/app/_layout";
 
 export default function OrderBS({ theme }: any) {
   const styles = useStyle(style, theme);

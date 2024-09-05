@@ -1,6 +1,6 @@
 import { StatusBar, StyleSheet, Switch, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../_layout";
+import { ThemeContext } from "@/contexts/ThemeContext";
 import { Colors } from "@/constants/Colors";
 
 export default function Settings() {

@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/app/_layout";
+import { ThemeContext } from "@/contexts/ThemeContext";
 import { Colors } from "@/constants/Colors";
 import { useContext, useMemo } from "react";
 

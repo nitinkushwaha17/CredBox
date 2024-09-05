@@ -4,7 +4,7 @@ import MyOrderBS, { OrderStatus } from "./bottom_sheet/MyOrderBS";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import OrderInfoCard from "./OrderInfoCard";
 import RequestsBS from "./bottom_sheet/RequestsBS";
-import { ThemeContext } from "@/app/_layout";
+import { ThemeContext } from "@/contexts/ThemeContext";
 
 const snapPoints = ["25%", "50%"];
 

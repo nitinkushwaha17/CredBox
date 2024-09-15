@@ -7,15 +7,25 @@ import {
   Image,
 } from "react-native";
 import { useNavigation } from "expo-router";
-import { useEffect } from "react";
-import { Colors } from "@/constants/Colors";
+import { useEffect, useState } from "react";
 import CBButton from "@/components/CBButton";
 import { useStyle } from "@/hooks/useStyle";
+import Chip from "@/components/Chip";
 
 export default function newRequest() {
   const navigation = useNavigation();
+  const styles = useStyle(style);
 
-  const style = useStyle(styles);
+  const [checked, setChecked] = useState<number>(0);
+
+  const Options = [
+    "Early Breakfast",
+    "Breakfast",
+    "Lunch",
+    "Snacks",
+    "Dinner",
+    "All Day",
+  ];
 
   useEffect(() => {
     navigation.setOptions({ title: "New Request" });
@@ -31,30 +41,44 @@ export default function newRequest() {
     >
       <Image
         source={require("@/assets/images/knife-fork.png")}
-        style={{ width: 250, height: 250, margin: "auto" }}
+        style={{ width: 200, height: 200, margin: "auto" }}
       />
-      <View style={style.inputContainer}>
-        <Text style={style.heading}>Counter</Text>
-        <TextInput style={style.input} />
+      <View style={styles.inputContainer}>
+        <Text style={styles.heading}>Counter</Text>
+        <TextInput style={styles.input} />
       </View>
-      <View style={style.inputContainer}>
-        <Text style={style.heading}>Item</Text>
-        <TextInput style={style.input} />
+      <View style={styles.inputContainer}>
+        <Text style={styles.heading}>Item</Text>
+        <TextInput style={styles.input} />
       </View>
-      <View style={style.inputContainer}>
-        <Text style={style.heading}>Price</Text>
+      <View style={styles.inputContainer}>
+        <Text style={styles.heading}>Price</Text>
         <TextInput
-          style={style.input}
+          style={styles.input}
           keyboardType="number-pad"
           maxLength={3}
         />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.heading}>Time of day</Text>
+        <View style={{ flexDirection: "row", gap: 16, flexWrap: "wrap" }}>
+          {Options.map((option, idx) => (
+            <Chip
+              key={idx}
+              checked={idx == checked}
+              setChecked={() => setChecked(idx)}
+            >
+              {option}
+            </Chip>
+          ))}
+        </View>
       </View>
       <CBButton containerStyle={{ marginTop: 8 }}>Submit</CBButton>
     </ScrollView>
   );
 }
 
-const styles = (Colors: any) =>
+const style = (Colors: any) =>
   StyleSheet.create({
     heading: {
       fontSize: 18,

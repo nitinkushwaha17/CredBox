@@ -16,6 +16,7 @@ import LottieView from "lottie-react-native";
 import { View } from "react-native";
 import Splash from "./splash";
 import { ThemeContext } from "@/contexts/ThemeContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -24,6 +25,7 @@ export type themeType = "light" | "dark";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const queryClient = new QueryClient();
 
   // const [colorScheme, setColorScheme] = useState<ColorSchemeName>(
   //   Appearance.getColorScheme()
@@ -72,22 +74,24 @@ export default function RootLayout() {
       <BottomSheetModalProvider>
         <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
           <ThemeContext.Provider value={themeData}>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen
-                name="counterInfo"
-                options={{
-                  contentStyle: { backgroundColor: Colors[theme].background },
-                }}
-              />
-              <Stack.Screen
-                name="newRequest"
-                options={{
-                  contentStyle: { backgroundColor: Colors[theme].background },
-                }}
-              />
-              <Stack.Screen name="+not-found" />
-            </Stack>
+            <QueryClientProvider client={queryClient}>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="counterInfo"
+                  options={{
+                    contentStyle: { backgroundColor: Colors[theme].background },
+                  }}
+                />
+                <Stack.Screen
+                  name="newRequest"
+                  options={{
+                    contentStyle: { backgroundColor: Colors[theme].background },
+                  }}
+                />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+            </QueryClientProvider>
           </ThemeContext.Provider>
         </ThemeProvider>
       </BottomSheetModalProvider>

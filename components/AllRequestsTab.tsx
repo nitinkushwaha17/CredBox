@@ -6,9 +6,10 @@ import RequestCard from "@/components/RequestCard";
 import { useStyle } from "@/hooks/useStyle";
 import { Ionicons } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { TabActions } from "@react-navigation/native";
-import { useCallback, useContext, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import { useQuery } from "@tanstack/react-query";
+import axios from "@/axios";
 
 const initialCheckedArray = [true, false, false];
 const Options = ["All", "Accepted by me", "Completed by me"];
@@ -29,6 +30,15 @@ export default function AllRequestsTab() {
       setRefreshing(false);
     }, 2000);
   }, []);
+
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["allRequests"],
+    queryFn: async () => {
+      return await axios.get("/");
+    },
+  });
+
+  useEffect(() => console.log(data?.data), [data]);
 
   const setChip = useCallback(
     (idx: number) => {

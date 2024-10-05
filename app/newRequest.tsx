@@ -23,6 +23,8 @@ export default function newRequest() {
     navigation.setOptions({ title: "New Request" });
   }, []);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -35,9 +37,15 @@ export default function newRequest() {
       tod: 0,
     },
   });
+
   const onSubmit: any = useMutation({
     mutationFn: (values: any) => {
+      setIsSubmitting(true);
       return axios.post("/", values);
+    },
+    // TODO: navigate to main page and show success message
+    onSettled: () => {
+      setIsSubmitting(false);
     },
   });
 
@@ -131,6 +139,7 @@ export default function newRequest() {
       <CBButton
         containerStyle={{ marginTop: 8 }}
         onPress={handleSubmit(onSubmit.mutate)}
+        loading={isSubmitting}
       >
         Submit
       </CBButton>

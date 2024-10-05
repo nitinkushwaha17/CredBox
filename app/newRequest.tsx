@@ -10,26 +10,36 @@ import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import CBButton from "@/components/CBButton";
 import { useStyle } from "@/hooks/useStyle";
-import Chip from "@/components/Chip";
+import axios from "@/axios";
+import { useMutation } from "@tanstack/react-query";
+import { Controller, useForm } from "react-hook-form";
+import TodSelect from "@/components/TodSelect";
 
 export default function newRequest() {
   const navigation = useNavigation();
   const styles = useStyle(style);
 
-  const [checked, setChecked] = useState<number>(0);
-
-  const Options = [
-    "Early Breakfast",
-    "Breakfast",
-    "Lunch",
-    "Snacks",
-    "Dinner",
-    "All Day",
-  ];
-
   useEffect(() => {
     navigation.setOptions({ title: "New Request" });
   }, []);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      counter: "",
+      item: "",
+      price: "",
+      tod: 0,
+    },
+  });
+  const onSubmit: any = useMutation({
+    mutationFn: (values: any) => {
+      return axios.post("/", values);
+    },
+  });
 
   return (
     <ScrollView
@@ -45,35 +55,85 @@ export default function newRequest() {
       />
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Counter</Text>
-        <TextInput style={styles.input} />
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              style={styles.input}
+            />
+          )}
+          name="counter"
+        />
+        {errors.counter && (
+          <Text style={{ color: "red" }}>This is required.</Text>
+        )}
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Item</Text>
-        <TextInput style={styles.input} />
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              style={styles.input}
+            />
+          )}
+          name="item"
+        />
+        {errors.counter && (
+          <Text style={{ color: "red" }}>This is required.</Text>
+        )}
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Price</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="number-pad"
-          maxLength={3}
+        <Controller
+          control={control}
+          rules={{
+            required: false,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              style={styles.input}
+              keyboardType="number-pad"
+              maxLength={3}
+            />
+          )}
+          name="price"
         />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Time of day</Text>
-        <View style={{ flexDirection: "row", gap: 16, flexWrap: "wrap" }}>
-          {Options.map((option, idx) => (
-            <Chip
-              key={idx}
-              checked={idx == checked}
-              setChecked={() => setChecked(idx)}
-            >
-              {option}
-            </Chip>
-          ))}
-        </View>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <TodSelect setChecked={onChange} checkedIdx={value} />
+          )}
+          name="tod"
+        />
       </View>
-      <CBButton containerStyle={{ marginTop: 8 }}>Submit</CBButton>
+      <CBButton
+        containerStyle={{ marginTop: 8 }}
+        onPress={handleSubmit(onSubmit.mutate)}
+      >
+        Submit
+      </CBButton>
     </ScrollView>
   );
 }

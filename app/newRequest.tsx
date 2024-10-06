@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import CBButton from "@/components/CBButton";
 import { useStyle } from "@/hooks/useStyle";
 import axios from "@/axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import TodSelect from "@/components/TodSelect";
 
@@ -22,6 +22,13 @@ export default function newRequest() {
   useEffect(() => {
     navigation.setOptions({ title: "New Request" });
   }, []);
+
+  const todQuery = useQuery({
+    queryKey: ["getTods"],
+    queryFn: async () => {
+      return await axios.get("/tod/");
+    },
+  });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -34,7 +41,7 @@ export default function newRequest() {
       counter: "",
       item: "",
       price: "",
-      tod: 0,
+      tod: "",
     },
   });
 
@@ -43,11 +50,18 @@ export default function newRequest() {
       setIsSubmitting(true);
       return axios.post("/", values);
     },
-    // TODO: navigate to main page and show success message
+    // TODO:show success message
+    onSuccess: () => {
+      navigation.goBack();
+    },
     onSettled: () => {
       setIsSubmitting(false);
     },
   });
+
+  if (todQuery.isPending) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <ScrollView
@@ -61,6 +75,7 @@ export default function newRequest() {
         source={require("@/assets/images/knife-fork.png")}
         style={{ width: 200, height: 200, margin: "auto" }}
       />
+
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Counter</Text>
         <Controller
@@ -82,6 +97,7 @@ export default function newRequest() {
           <Text style={{ color: "red" }}>This is required.</Text>
         )}
       </View>
+
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Item</Text>
         <Controller
@@ -103,6 +119,7 @@ export default function newRequest() {
           <Text style={{ color: "red" }}>This is required.</Text>
         )}
       </View>
+
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Price</Text>
         <Controller
@@ -123,6 +140,7 @@ export default function newRequest() {
           name="price"
         />
       </View>
+
       <View style={styles.inputContainer}>
         <Text style={styles.heading}>Time of day</Text>
         <Controller
@@ -131,11 +149,19 @@ export default function newRequest() {
             required: true,
           }}
           render={({ field: { onChange, value } }) => (
-            <TodSelect setChecked={onChange} checkedIdx={value} />
+            <TodSelect
+              options={todQuery.data?.data}
+              setChecked={onChange}
+              checkedId={value}
+            />
           )}
           name="tod"
         />
+        {errors.counter && (
+          <Text style={{ color: "red" }}>This is required.</Text>
+        )}
       </View>
+
       <CBButton
         containerStyle={{ marginTop: 8 }}
         onPress={handleSubmit(onSubmit.mutate)}

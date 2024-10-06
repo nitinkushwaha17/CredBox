@@ -1,32 +1,40 @@
 import { StyleSheet, Text, View } from "react-native";
 import Chip from "./Chip";
 
+interface TodOption {
+  _id: string;
+  name: string;
+}
+
 export default function TodSelect({
-  checkedIdx,
+  checkedId,
   setChecked,
+  options,
 }: {
-  checkedIdx: number;
-  setChecked: (n: number) => void;
+  checkedId: string;
+  setChecked: (n: string) => void;
+  options: TodOption[];
 }) {
   // TODO: fetch options
-  const Options = [
-    "All Day",
-    "Early Breakfast",
-    "Breakfast",
-    "Lunch",
-    "Snacks",
-    "Dinner",
-  ];
+  // const Options = [
+  //   "All Day",
+  //   "Early Breakfast",
+  //   "Breakfast",
+  //   "Lunch",
+  //   "Snacks",
+  //   "Dinner",
+  // ];
 
   return (
     <View style={{ flexDirection: "row", gap: 16, flexWrap: "wrap" }}>
-      {Options.map((option, idx) => (
+      {options.map((option: TodOption) => (
         <Chip
-          key={idx}
-          checked={idx == checkedIdx}
-          setChecked={() => setChecked(idx)}
+          key={option._id}
+          checked={option._id == checkedId}
+          setChecked={() => setChecked(option._id)}
+          style={{ textTransform: "capitalize" }}
         >
-          {option}
+          {option.name}
         </Chip>
       ))}
     </View>

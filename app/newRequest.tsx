@@ -41,14 +41,16 @@ export default function newRequest() {
       counter: "",
       item: "",
       price: "",
-      tod: "",
+      tod_id: "",
     },
   });
 
   const onSubmit: any = useMutation({
     mutationFn: (values: any) => {
       setIsSubmitting(true);
-      return axios.post("/", values);
+      values.user_id = "6702957c2a68d28a33bd7fae";
+      values.is_custom = true;
+      return axios.post("/order", values);
     },
     // TODO:show success message
     onSuccess: () => {
@@ -155,7 +157,7 @@ export default function newRequest() {
               checkedId={value}
             />
           )}
-          name="tod"
+          name="tod_id"
         />
         {errors.counter && (
           <Text style={{ color: "red" }}>This is required.</Text>

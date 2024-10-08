@@ -15,7 +15,13 @@ import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
 import { themeType } from "@/app/_layout";
 
-export default function RequestsBS({ theme }: { theme: themeType }) {
+export default function RequestsBS({
+  infoCardData,
+  theme,
+}: {
+  infoCardData: any;
+  theme: themeType;
+}) {
   const styles = useStyle(style, theme);
 
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -27,7 +33,7 @@ export default function RequestsBS({ theme }: { theme: themeType }) {
 
   return (
     <View>
-      <OrderInfoCard theme={theme} />
+      <OrderInfoCard data={infoCardData} theme={theme} />
       <View style={{ marginTop: 16, padding: 16, gap: 16 }}>
         <View style={{ gap: 8 }}>
           <Text style={styles.text}>Order PIN</Text>

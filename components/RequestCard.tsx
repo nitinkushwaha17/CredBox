@@ -9,9 +9,11 @@ import { ThemeContext } from "@/contexts/ThemeContext";
 const snapPoints = ["25%", "50%"];
 
 export default function RequestCard({
+  data,
   myOrderCard,
   status,
 }: {
+  data?: any;
   status?: OrderStatus;
   myOrderCard?: boolean;
 }) {
@@ -20,7 +22,11 @@ export default function RequestCard({
 
   return (
     <>
-      <OrderInfoCard status={status} onPress={() => bsref.current?.present()} />
+      <OrderInfoCard
+        data={data}
+        status={status}
+        onPress={() => bsref.current?.present()}
+      />
       {myOrderCard ? (
         status !== "in-process" && (
           <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
@@ -29,7 +35,7 @@ export default function RequestCard({
         )
       ) : (
         <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-          <RequestsBS theme={theme} />
+          <RequestsBS infoCardData={data} theme={theme} />
         </CBBottomSheet>
       )}
     </>

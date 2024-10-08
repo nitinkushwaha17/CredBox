@@ -8,16 +8,21 @@ import { useStyle } from "@/hooks/useStyle";
 
 export type OrderStatus = "new" | "in-process" | "completed";
 interface MyOrderBSProps {
+  infoCardData?: any;
   status?: OrderStatus;
   theme: "light" | "dark";
 }
 
-export default function MyOrderBS({ status = "new", theme }: MyOrderBSProps) {
+export default function MyOrderBS({
+  infoCardData,
+  status = "new",
+  theme,
+}: MyOrderBSProps) {
   const styles = useStyle(style, theme);
 
   return (
     <View>
-      <OrderInfoCard theme={theme} />
+      <OrderInfoCard data={infoCardData} theme={theme} />
       {status === "completed" ? (
         <>
           <View style={styles.qrContainer}>

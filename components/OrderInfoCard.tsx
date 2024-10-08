@@ -15,10 +15,12 @@ import { useStyle } from "@/hooks/useStyle";
 import { themeType } from "@/app/_layout";
 
 export default function OrderInfoCard({
+  data,
   status = "new",
   onPress,
   theme,
 }: {
+  data?: any;
   status?: OrderStatus;
   onPress?: (event: GestureResponderEvent) => void;
   theme?: themeType;
@@ -55,11 +57,17 @@ export default function OrderInfoCard({
         }}
       >
         <View>
-          <Text style={styles.counterText}>Meal O Pedia</Text>
-          <Text style={styles.itemText}>Watermelon juice</Text>
+          <Text style={styles.counterText}>
+            {data?.counter ? data.counter : `Meal O Pedia`}
+          </Text>
+          <Text style={styles.itemText}>
+            {data?.item ? data.item : `Watermelon juice`}
+          </Text>
         </View>
         <View>
-          <Text style={styles.amountText}>Rs. 100.00</Text>
+          <Text style={styles.amountText}>
+            Rs. {data?.price ? data.price : 100.0}
+          </Text>
           {/* <Text
             style={[
               styles.counterText,

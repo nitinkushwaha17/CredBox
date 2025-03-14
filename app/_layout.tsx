@@ -22,10 +22,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 SplashScreen.preventAutoHideAsync();
 
 export type themeType = "light" | "dark";
+export const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const queryClient = new QueryClient();
 
   // const [colorScheme, setColorScheme] = useState<ColorSchemeName>(
   //   Appearance.getColorScheme()
@@ -71,10 +71,10 @@ export default function RootLayout() {
         backgroundColor: Colors.dark.background,
       }}
     >
-      <BottomSheetModalProvider>
-        <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
-          <ThemeContext.Provider value={themeData}>
-            <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <BottomSheetModalProvider>
+          <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
+            <ThemeContext.Provider value={themeData}>
               <Stack>
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen
@@ -91,10 +91,10 @@ export default function RootLayout() {
                 />
                 <Stack.Screen name="+not-found" />
               </Stack>
-            </QueryClientProvider>
-          </ThemeContext.Provider>
-        </ThemeProvider>
-      </BottomSheetModalProvider>
+            </ThemeContext.Provider>
+          </ThemeProvider>
+        </BottomSheetModalProvider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   );
 }

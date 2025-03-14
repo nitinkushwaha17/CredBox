@@ -4,6 +4,7 @@ import {
   Text,
   ScrollView,
   RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Appbar from "@/components/appbar/Appbar";
@@ -12,8 +13,10 @@ import CounterCard from "@/components/CounterCard";
 import FAB from "@/components/FAB";
 import { Link } from "expo-router";
 import CompletedOrderCard from "@/components/CompletedOrderCard";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useStyle } from "@/hooks/useStyle";
+import { useQuery } from "@tanstack/react-query";
+import axios from "@/axios";
 
 export default function Home() {
   const [refreshing, setRefreshing] = useState(false);
@@ -26,6 +29,18 @@ export default function Home() {
       setRefreshing(false);
     }, 2000);
   }, []);
+
+  const getAllCountersQuery = useQuery({
+    queryKey: ["allCounters"],
+    queryFn: async () => {
+      return await axios.get("/counter/all", {
+        params: {
+          user_id: "6702957c2a68d28a33bd7fae",
+          cafeteria_id: "6779719d5215524013d69f60",
+        },
+      });
+    },
+  });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -57,13 +72,17 @@ export default function Home() {
 
         <View>
           <Text style={styles.heading}>Explore Counters</Text>
-          <View style={[styles.contentContainer, { gap: 0 }]}>
-            <CounterCard />
-            <CounterCard />
-            <CounterCard />
-            <CounterCard />
-            <CounterCard />
-          </View>
+          {getAllCountersQuery.data ? (
+            <View style={[styles.contentContainer, { gap: 0 }]}>
+              {getAllCountersQuery.data.data.map(
+                (counter: any, idx: number) => (
+                  <CounterCard counter={counter} key={idx} />
+                )
+              )}
+            </View>
+          ) : (
+            <ActivityIndicator size="large" />
+          )}
         </View>
 
         <View>

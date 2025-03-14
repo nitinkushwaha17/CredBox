@@ -14,6 +14,8 @@ import CBButton from "../CBButton";
 import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
 import { themeType } from "@/app/_layout";
+import { useMutation } from "@tanstack/react-query";
+import axios from "@/axios";
 
 export default function RequestsBS({
   infoCardData,
@@ -25,11 +27,32 @@ export default function RequestsBS({
   const styles = useStyle(style, theme);
 
   const [disabled, setDisabled] = useState<boolean>(true);
+  const [disabledAccept, setDisabledAccept] = useState<boolean>(false);
   const [pin, setPin] = useState<string>("");
 
-  const handleInput = useCallback(() => {
-    setDisabled(pin.length !== 6);
-  }, [pin]);
+  const handleInput = useCallback((text: string) => {
+    setPin(text);
+    setDisabled(text.length !== 6);
+  }, []);
+
+  console.log("test:", infoCardData);
+
+  const onAccept: any = useMutation({
+    mutationFn: () => {
+      let values = {};
+      values.user_id = "6702957c2a68d28a33bd7fae";
+      // values.is_custom = true;
+      values.order_id = infoCardData.id;
+      return axios.post("/order/accept", values);
+    },
+    // TODO:show success message
+    onSuccess: () => {
+      setDisabledAccept(true);
+    },
+    onSettled: () => {
+      return;
+    },
+  });
 
   return (
     <View>
@@ -41,15 +64,16 @@ export default function RequestsBS({
             style={styles.input}
             maxLength={6}
             keyboardType="number-pad"
-            onTextInput={handleInput}
             value={pin}
-            onChangeText={setPin}
+            onChangeText={(text) => handleInput(text)}
           />
         </View>
         <CBButton disabled={disabled} loading={disabled}>
           Submit
         </CBButton>
-        {disabled && <CBButton>Accept</CBButton>}
+        {!disabledAccept && (
+          <CBButton onPress={onAccept.mutate}>Accept</CBButton>
+        )}
       </View>
     </View>
   );

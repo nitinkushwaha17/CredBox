@@ -4,81 +4,48 @@ import CBButton from "../CBButton";
 import { useContext, useState } from "react";
 import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
+import QuantitySelect from "../QuantitySelect";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useNavigation } from "expo-router";
 
 export default function OrderBS({ theme }: any) {
-  const styles = useStyle(style, theme);
+  const [qty, setQty] = useState<number>(1);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const navigation = useNavigation();
 
-  const [qty, setQty] = useState<string>("1");
+  const onSubmit: any = useMutation({
+    mutationFn: (values: any) => {
+      setIsSubmitting(true);
+      values.user_id = "6702957c2a68d28a33bd7fae";
+      values.is_custom = true;
+      return axios.post("/order", values);
+    },
+    // TODO:show success message
+    onSuccess: () => {
+      navigation.goBack();
+    },
+    onSettled: () => {
+      setIsSubmitting(false);
+    },
+  });
 
-  const validateAndSetQty = (num: string) => {
-    let quantity = parseInt(num);
-    if (isNaN(quantity)) return;
-
-    quantity = Math.min(quantity, 5);
-    quantity = Math.max(quantity, 1);
-
-    setQty(quantity.toString());
-  };
+  function handleSubmit(mutate: any): (() => void) | undefined {
+    // throw new Error("Function not implemented.");
+  }
 
   return (
     <View>
       <OrderInfoCard theme={theme} />
       <View style={{ padding: 16, gap: 16 }}>
-        <View style={styles.qtyContainer}>
-          <Text style={styles.text}>Order Quantity: </Text>
-          <View style={styles.controlsContainer}>
-            <TouchableOpacity
-              onPress={() => validateAndSetQty((parseInt(qty) - 1).toString())}
-            >
-              <Ionicons name="remove-outline" style={styles.controls} />
-            </TouchableOpacity>
-            <Text style={styles.qtyText}>{qty}</Text>
-            <TouchableOpacity
-              onPress={() => validateAndSetQty((parseInt(qty) + 1).toString())}
-            >
-              <Ionicons name="add-outline" style={styles.controls} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <CBButton>Order</CBButton>
+        <QuantitySelect value={qty} onChange={setQty} />
+        <CBButton
+          onPress={handleSubmit(onSubmit.mutate)}
+          loading={isSubmitting}
+        >
+          Order
+        </CBButton>
       </View>
     </View>
   );
 }
-
-const style = (Colors: any) =>
-  StyleSheet.create({
-    qtyContainer: {
-      marginHorizontal: "auto",
-      marginVertical: 16,
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 8,
-    },
-    controlsContainer: {
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: 8,
-      backgroundColor: Colors.onBackground,
-      borderRadius: 8,
-    },
-    controls: {
-      color: Colors.text,
-      fontSize: 16,
-      fontWeight: "bold",
-      padding: 8,
-    },
-    qtyText: {
-      color: Colors.text,
-      fontSize: 16,
-      fontWeight: "600",
-      textAlign: "center",
-    },
-    text: {
-      color: Colors.text,
-      fontSize: 16,
-      fontWeight: "600",
-      marginHorizontal: "auto",
-    },
-  });

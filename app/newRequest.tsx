@@ -14,6 +14,7 @@ import axios from "@/axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import TodSelect from "@/components/TodSelect";
+import QuantitySelect from "@/components/QuantitySelect";
 
 export default function newRequest() {
   const navigation = useNavigation();
@@ -42,6 +43,7 @@ export default function newRequest() {
       item: "",
       price: "",
       tod_id: "",
+      quantity: 1,
     },
   });
 
@@ -141,6 +143,23 @@ export default function newRequest() {
           )}
           name="price"
         />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.heading}>Quantity</Text>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <QuantitySelect value={value} onChange={onChange} />
+          )}
+          name="quantity"
+        />
+        {errors.counter && (
+          <Text style={{ color: "red" }}>This is required.</Text>
+        )}
       </View>
 
       <View style={styles.inputContainer}>

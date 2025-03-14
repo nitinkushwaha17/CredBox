@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { Link } from "expo-router";
 import { useStyle } from "@/hooks/useStyle";
 
-export default function CounterCard() {
+export default function CounterCard({ counter }: { counter: any }) {
   const styles = useStyle(style);
   return (
     <Link href="/counterInfo">
@@ -17,7 +17,7 @@ export default function CounterCard() {
           }}
         />
         <View style={{ marginLeft: 12 }}>
-          <Text style={styles.name}>Meal O Pedia</Text>
+          <Text style={styles.name}>{counter.name}</Text>
           <Text style={styles.order}>2 pending requests</Text>
         </View>
       </View>

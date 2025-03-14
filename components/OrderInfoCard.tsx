@@ -89,7 +89,10 @@ export default function OrderInfoCard({
             Breakfast
           </Chip> */}
           <View style={{ marginLeft: "auto" }}>
-            <TODChip />
+            <Text style={styles.todText}>
+              {data?.tod ? data.tod : "all day"}
+            </Text>
+            {/* <TODChip /> */}
           </View>
         </View>
       </View>
@@ -193,5 +196,12 @@ const style = (Colors: any) =>
       fontWeight: "600",
       color: Colors.text,
       marginLeft: "auto",
+    },
+    todText: {
+      fontSize: 14,
+      // fontWeight: "600",
+      color: "#00a6a4",
+      marginLeft: "auto",
+      textTransform: "capitalize",
     },
   });

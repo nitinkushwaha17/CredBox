@@ -16,7 +16,13 @@ import LottieView from "lottie-react-native";
 import { View } from "react-native";
 import Splash from "./splash";
 import { ThemeContext } from "@/contexts/ThemeContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
+import { useGlobalStore } from "@/store";
+import Main from "./main";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -25,7 +31,7 @@ export type themeType = "light" | "dark";
 export const queryClient = new QueryClient();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  // const colorScheme = useColorScheme();
 
   // const [colorScheme, setColorScheme] = useState<ColorSchemeName>(
   //   Appearance.getColorScheme()
@@ -40,13 +46,16 @@ export default function RootLayout() {
   //   return () => subscription.remove();
   // }, [setColorScheme]);
 
-  const [theme, setTheme] = useState<themeType>(
-    colorScheme ? colorScheme : "light"
-  );
+  const theme = useGlobalStore((state) => state.theme);
+  const setTheme = useGlobalStore((state) => state.setTheme);
 
-  useEffect(() => {
-    setTheme(colorScheme ? colorScheme : "light");
-  }, [colorScheme]);
+  // const [theme, setTheme] = useState<themeType>(
+  //   colorScheme ? colorScheme : "light"
+  // );
+
+  // useEffect(() => {
+  //   setTheme(colorScheme ? colorScheme : "light");
+  // }, [colorScheme]);
 
   const themeData = { theme, setTheme };
 
@@ -60,7 +69,28 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  if (!loaded) {
+  useEffect(() => {
+    console.log(useGlobalStore.persist.hasHydrated());
+  }, []);
+
+  // const setUser = useGlobalStore((state) => state.setUser);
+  // const user = useGlobalStore((state) => state.user);
+  // const { isPending, error, data, isFetching, refetch } = useQuery({
+  //   queryKey: ["userReq"],
+  //   queryFn: async () => {
+  //     return await axios.get("/user/test");
+  //   },
+  // });
+  // // if(isPending) return null;
+
+  // useEffect(() => {
+  //   console.log(data?.data);
+  //   setUser(data?.data);
+  // }, [data]);
+
+  // if (!user) return null;
+
+  if (!loaded || !useGlobalStore.persist.hasHydrated()) {
     return null;
   }
 
@@ -75,22 +105,7 @@ export default function RootLayout() {
         <BottomSheetModalProvider>
           <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
             <ThemeContext.Provider value={themeData}>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen
-                  name="counterInfo"
-                  options={{
-                    contentStyle: { backgroundColor: Colors[theme].background },
-                  }}
-                />
-                <Stack.Screen
-                  name="newRequest"
-                  options={{
-                    contentStyle: { backgroundColor: Colors[theme].background },
-                  }}
-                />
-                <Stack.Screen name="+not-found" />
-              </Stack>
+              <Main theme={theme} />
             </ThemeContext.Provider>
           </ThemeProvider>
         </BottomSheetModalProvider>

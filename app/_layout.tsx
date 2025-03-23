@@ -31,34 +31,6 @@ export type themeType = "light" | "dark";
 export const queryClient = new QueryClient();
 
 export default function RootLayout() {
-  // const colorScheme = useColorScheme();
-
-  // const [colorScheme, setColorScheme] = useState<ColorSchemeName>(
-  //   Appearance.getColorScheme()
-  // );
-
-  // useEffect(() => {
-  //   const subscription = Appearance.addChangeListener(
-  //     ({ colorScheme: newColorScheme }: { colorScheme: ColorSchemeName }) => {
-  //       setColorScheme(newColorScheme);
-  //     }
-  //   );
-  //   return () => subscription.remove();
-  // }, [setColorScheme]);
-
-  const theme = useGlobalStore((state) => state.theme);
-  const setTheme = useGlobalStore((state) => state.setTheme);
-
-  // const [theme, setTheme] = useState<themeType>(
-  //   colorScheme ? colorScheme : "light"
-  // );
-
-  // useEffect(() => {
-  //   setTheme(colorScheme ? colorScheme : "light");
-  // }, [colorScheme]);
-
-  const themeData = { theme, setTheme };
-
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -103,11 +75,7 @@ export default function RootLayout() {
     >
       <QueryClientProvider client={queryClient}>
         <BottomSheetModalProvider>
-          <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>
-            <ThemeContext.Provider value={themeData}>
-              <Main theme={theme} />
-            </ThemeContext.Provider>
-          </ThemeProvider>
+          <Main />
         </BottomSheetModalProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

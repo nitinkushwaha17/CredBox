@@ -42,6 +42,9 @@ export default function TabLayout() {
           headerStyle: {
             backgroundColor: Colors[theme].background,
           },
+          headerTitleStyle: {
+            color: Colors[theme].text,
+          },
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "git-pull-request" : "git-pull-request-outline"}
@@ -67,6 +70,12 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors[theme].background,
+          },
+          headerTitleStyle: {
+            color: Colors[theme].text,
+          },
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "settings" : "settings-outline"}

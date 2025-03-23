@@ -1,6 +1,5 @@
 import { Stack } from "expo-router";
 import { Colors } from "@/constants/Colors";
-import { themeType } from "./_layout";
 import { useGlobalStore } from "@/store";
 
 export default function Main() {
@@ -21,12 +20,22 @@ export default function Main() {
         name="counterInfo"
         options={{
           contentStyle: { backgroundColor: Colors[theme].background },
+          headerStyle: {
+            backgroundColor: Colors[theme].background,
+          },
+          headerBackButtonDisplayMode: "minimal",
+          headerTintColor: Colors[theme].text,
         }}
       />
       <Stack.Screen
         name="newRequest"
         options={{
           contentStyle: { backgroundColor: Colors[theme].background },
+          headerStyle: {
+            backgroundColor: Colors[theme].background,
+          },
+          headerBackButtonDisplayMode: "minimal",
+          headerTintColor: Colors[theme].text,
         }}
       />
       <Stack.Screen name="+not-found" />

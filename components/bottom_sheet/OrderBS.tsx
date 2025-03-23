@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigation } from "expo-router";
 
-export default function OrderBS({ theme }: any) {
+export default function OrderBS() {
   const [qty, setQty] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const navigation = useNavigation();
@@ -36,7 +36,7 @@ export default function OrderBS({ theme }: any) {
 
   return (
     <View>
-      <OrderInfoCard theme={theme} />
+      <OrderInfoCard />
       <View style={{ padding: 16, gap: 16 }}>
         <QuantitySelect value={qty} onChange={setQty} />
         <CBButton

@@ -120,7 +120,7 @@ export default function Home() {
           </ScrollView>
         </View>
 
-        <View style={{ height: 300 }}></View>
+        <View style={{ height: 200 }}></View>
       </ScrollView>
       <FAB />
     </SafeAreaView>

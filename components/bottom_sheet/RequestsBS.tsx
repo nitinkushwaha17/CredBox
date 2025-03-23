@@ -17,14 +17,8 @@ import { themeType } from "@/app/_layout";
 import { useMutation } from "@tanstack/react-query";
 import axios from "@/axios";
 
-export default function RequestsBS({
-  infoCardData,
-  theme,
-}: {
-  infoCardData: any;
-  theme: themeType;
-}) {
-  const styles = useStyle(style, theme);
+export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
+  const styles = useStyle(style);
 
   const [disabled, setDisabled] = useState<boolean>(true);
   const [disabledAccept, setDisabledAccept] = useState<boolean>(false);
@@ -56,7 +50,7 @@ export default function RequestsBS({
 
   return (
     <View>
-      <OrderInfoCard data={infoCardData} theme={theme} />
+      <OrderInfoCard data={infoCardData} />
       <View style={{ marginTop: 16, padding: 16, gap: 16 }}>
         <View style={{ gap: 8 }}>
           <Text style={styles.text}>Order PIN</Text>

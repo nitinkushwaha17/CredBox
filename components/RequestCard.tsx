@@ -17,7 +17,6 @@ export default function RequestCard({
   status?: OrderStatus;
   myOrderCard?: boolean;
 }) {
-  const { theme } = useContext(ThemeContext);
   const bsref = useRef<BottomSheetModal>(null);
 
   return (
@@ -30,12 +29,12 @@ export default function RequestCard({
       {myOrderCard ? (
         status !== "in-process" && (
           <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-            <MyOrderBS status={status} theme={theme} />
+            <MyOrderBS status={status} />
           </CBBottomSheet>
         )
       ) : (
         <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-          <RequestsBS infoCardData={data} theme={theme} />
+          <RequestsBS infoCardData={data} />
         </CBBottomSheet>
       )}
     </>

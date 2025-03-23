@@ -23,7 +23,6 @@ const snapPoints = ["25%", "50%"];
 
 export default function AllRequestsTab() {
   const styles = useStyle(style);
-  // const { theme } = useContext(ThemeContext);
 
   const [checked, setChecked] = useState<boolean[]>(initialCheckedArray);
   // const bsref = useRef<BottomSheetModal>(null);

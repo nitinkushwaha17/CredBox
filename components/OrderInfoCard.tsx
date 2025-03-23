@@ -18,14 +18,12 @@ export default function OrderInfoCard({
   data,
   status = "new",
   onPress,
-  theme,
 }: {
   data?: any;
   status?: OrderStatus;
   onPress?: (event: GestureResponderEvent) => void;
-  theme?: themeType;
 }) {
-  const styles = useStyle(style, theme ?? undefined);
+  const styles = useStyle(style);
 
   return (
     <Pressable style={styles.card} onPress={onPress}>

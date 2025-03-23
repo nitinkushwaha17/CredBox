@@ -5,24 +5,24 @@ import { Colors } from "@/constants/Colors";
 import CBButton from "../CBButton";
 import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
+import { useGlobalStore } from "@/store";
 
 export type OrderStatus = "new" | "in-process" | "completed";
 interface MyOrderBSProps {
   infoCardData?: any;
   status?: OrderStatus;
-  theme: "light" | "dark";
 }
 
 export default function MyOrderBS({
   infoCardData,
   status = "new",
-  theme,
 }: MyOrderBSProps) {
-  const styles = useStyle(style, theme);
+  const theme = useGlobalStore((state) => state.theme);
+  const styles = useStyle(style);
 
   return (
     <View>
-      <OrderInfoCard data={infoCardData} theme={theme} />
+      <OrderInfoCard data={infoCardData} />
       {status === "completed" ? (
         <>
           <View style={styles.qrContainer}>

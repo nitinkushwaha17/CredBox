@@ -1,23 +1,25 @@
 import { Tabs } from "expo-router";
-
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
-import { useContext } from "react";
-import { ThemeContext } from "@/contexts/ThemeContext";
+import { useGlobalStore } from "@/store";
 
 export default function TabLayout() {
-  const { theme } = useContext(ThemeContext);
+  const theme = useGlobalStore((state) => state.theme);
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[theme ?? "light"].tint,
+        tabBarActiveTintColor: Colors[theme].tint,
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { height: 60 },
-      }}
-      sceneContainerStyle={{
-        backgroundColor: Colors[theme ?? "light"].background,
+        tabBarStyle: {
+          height: 60,
+          backgroundColor: Colors[theme].background,
+        },
+        sceneStyle: {
+          backgroundColor: Colors[theme].background,
+        },
+        animation: "shift",
       }}
     >
       <Tabs.Screen
@@ -37,6 +39,9 @@ export default function TabLayout() {
         options={{
           title: "Requests",
           headerShown: true,
+          headerStyle: {
+            backgroundColor: Colors[theme].background,
+          },
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "git-pull-request" : "git-pull-request-outline"}

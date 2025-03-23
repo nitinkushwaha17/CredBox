@@ -10,7 +10,6 @@ import { ThemeContext } from "@/contexts/ThemeContext";
 const snapPoints = ["25%", "50%"];
 
 export default function CompletedOrderCard() {
-  const { theme } = useContext(ThemeContext);
   const styles = useStyle(style);
   const bsref = useRef<BottomSheetModal>(null);
   return (
@@ -32,7 +31,7 @@ export default function CompletedOrderCard() {
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <MyOrderBS status="completed" theme={theme} />
+        <MyOrderBS status="completed" />
       </CBBottomSheet>
     </Pressable>
   );

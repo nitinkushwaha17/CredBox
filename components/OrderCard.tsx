@@ -12,15 +12,11 @@ import OrderBS from "./bottom_sheet/OrderBS";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useContext, useRef } from "react";
 import { useStyle } from "@/hooks/useStyle";
-import { ThemeContext } from "@/contexts/ThemeContext";
 
 const snapPoints = ["25%", "50%"];
 
 export default function OrderCard() {
   const bsref = useRef<BottomSheetModal>(null);
-
-  const { theme } = useContext(ThemeContext);
-
   const styles = useStyle(style);
 
   return (
@@ -47,7 +43,7 @@ export default function OrderCard() {
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <OrderBS theme={theme} />
+        <OrderBS />
       </CBBottomSheet>
     </Pressable>
   );

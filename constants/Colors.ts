@@ -17,6 +17,7 @@ export const Colors = {
     icon: "#687076",
     tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
+    text2: primary,
   },
   dark: {
     primary,
@@ -27,5 +28,6 @@ export const Colors = {
     icon: "#9BA1A6",
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
+    text2: "#00e6c4",
   },
 };

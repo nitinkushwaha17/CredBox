@@ -85,6 +85,6 @@ const style = (Colors: any) =>
     priceText: {
       fontWeight: "600",
       fontSize: 14,
-      color: Colors.primary,
+      color: Colors.text2,
     },
   });

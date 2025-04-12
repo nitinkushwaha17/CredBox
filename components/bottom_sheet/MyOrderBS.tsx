@@ -22,7 +22,7 @@ export default function MyOrderBS({
 
   return (
     <View>
-      <OrderInfoCard data={infoCardData} />
+      <OrderInfoCard item={infoCardData} />
       {status === "completed" ? (
         <>
           <View style={styles.qrContainer}>

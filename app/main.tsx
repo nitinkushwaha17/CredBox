@@ -17,7 +17,7 @@ export default function Main() {
         }}
       />
       <Stack.Screen
-        name="counterInfo"
+        name="counterInfo/[id]"
         options={{
           contentStyle: { backgroundColor: Colors[theme].background },
           headerStyle: {

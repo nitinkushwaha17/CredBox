@@ -1,42 +1,50 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useRef } from "react";
 import { Colors } from "@/constants/Colors";
-import { useNavigation } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import OrderBS from "@/components/bottom_sheet/OrderBS";
 import CBBottomSheet from "@/components/CBBottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useStyle } from "@/hooks/useStyle";
+import { useQuery } from "@tanstack/react-query";
+import axios from "@/axios";
 
 export default function CounterInfo() {
   const navigation = useNavigation();
+  const { id } = useLocalSearchParams();
+
+  const getAllItemsQuery = useQuery({
+    queryKey: ["allItems"],
+    queryFn: async () => {
+      return await axios.get("/item/all", {
+        params: {
+          tod_id: "66f0718b8ed9d74ea1208a41",
+          counter_id: id,
+        },
+      });
+    },
+  });
 
   useEffect(() => {
     navigation.setOptions({ title: "Meal O Pedia" });
   }, [navigation]);
 
+  if (getAllItemsQuery.isPending) return <Text>Loading...</Text>;
   return (
     <ScrollView>
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
+      {getAllItemsQuery.data?.data.map((item: any) => (
+        <ItemCard item={item} key={item._id} />
+      ))}
       <View style={{ height: 200 }}></View>
     </ScrollView>
   );
 }
 
 interface ItemCardProps {
-  item?: {
+  item: {
     name: string;
-    amount: number;
+    price: number;
+    _id: string;
   };
 }
 
@@ -52,12 +60,14 @@ function ItemCard({ item }: ItemCardProps) {
       onPress={() => bsref.current?.present()}
     >
       <Text style={[styles.itemCardText, { flex: 1, flexWrap: "wrap" }]}>
-        Veg Buffet
+        {item.name}
       </Text>
-      <Text style={[styles.itemCardText, styles.priceText]}>Rs 100.00</Text>
+      <Text style={[styles.itemCardText, styles.priceText]}>
+        Rs {item.price}
+      </Text>
 
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <OrderBS />
+        <OrderBS item={item} />
       </CBBottomSheet>
     </Pressable>
   );

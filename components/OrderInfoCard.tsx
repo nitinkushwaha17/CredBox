@@ -15,15 +15,16 @@ import { useStyle } from "@/hooks/useStyle";
 import { themeType } from "@/app/_layout";
 
 export default function OrderInfoCard({
-  data,
+  item,
   status = "new",
   onPress,
 }: {
-  data?: any;
+  item?: any;
   status?: OrderStatus;
   onPress?: (event: GestureResponderEvent) => void;
 }) {
   const styles = useStyle(style);
+  console.log(item);
 
   return (
     <Pressable style={styles.card} onPress={onPress}>
@@ -56,15 +57,15 @@ export default function OrderInfoCard({
       >
         <View>
           <Text style={styles.counterText}>
-            {data?.counter ? data.counter : `Meal O Pedia`}
+            {item?.counter ? item.counter : `Meal O Pedia`}
           </Text>
           <Text style={styles.itemText}>
-            {data?.item ? data.item : `Watermelon juice`}
+            {item?.name ? item.name : `Watermelon juice`}
           </Text>
         </View>
         <View>
           <Text style={styles.amountText}>
-            Rs. {data?.price ? data.price : 100.0}
+            Rs. {item?.price ? item.price : 100.0}
           </Text>
           {/* <Text
             style={[
@@ -88,7 +89,7 @@ export default function OrderInfoCard({
           </Chip> */}
           <View style={{ marginLeft: "auto" }}>
             <Text style={styles.todText}>
-              {data?.tod ? data.tod : "all day"}
+              {item?.tod ? item.tod : "all day"}
             </Text>
             {/* <TODChip /> */}
           </View>

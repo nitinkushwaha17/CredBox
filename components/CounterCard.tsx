@@ -5,7 +5,14 @@ import { useStyle } from "@/hooks/useStyle";
 export default function CounterCard({ counter }: { counter: any }) {
   const styles = useStyle(style);
   return (
-    <Link href="/counterInfo">
+    <Link
+      href={{
+        pathname: "/counterInfo/[id]",
+        params: {
+          id: counter._id,
+        },
+      }}
+    >
       <View style={styles.box}>
         <Image
           source={require("@/assets/images/menu.png")}

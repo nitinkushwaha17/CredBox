@@ -50,7 +50,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
 
   return (
     <View>
-      <OrderInfoCard data={infoCardData} />
+      <OrderInfoCard item={infoCardData} />
       <View style={{ marginTop: 16, padding: 16, gap: 16 }}>
         <View style={{ gap: 8 }}>
           <Text style={styles.text}>Order PIN</Text>

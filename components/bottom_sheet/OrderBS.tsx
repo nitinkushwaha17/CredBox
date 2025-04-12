@@ -6,8 +6,9 @@ import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
 import QuantitySelect from "../QuantitySelect";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "@/axios";
 import { useNavigation } from "expo-router";
+import { useGlobalStore } from "@/store";
 
 export default function OrderBS({ item }: any) {
   console.log(item);
@@ -15,12 +16,17 @@ export default function OrderBS({ item }: any) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const navigation = useNavigation();
 
+  const tod = useGlobalStore((state) => state.tod?.id);
+
   const onSubmit: any = useMutation({
-    mutationFn: (values: any) => {
+    mutationFn: (itemId: any) => {
+      console.log("itemId:", itemId);
       setIsSubmitting(true);
-      values.user_id = "6702957c2a68d28a33bd7fae";
-      values.is_custom = true;
-      return axios.post("/order", values);
+      const data = {
+        user_id: "6702957c2a68d28a33bd7fae",
+        item_id: itemId,
+      };
+      return axios.post("/order", data);
     },
     // TODO:show success message
     onSuccess: () => {
@@ -31,8 +37,8 @@ export default function OrderBS({ item }: any) {
     },
   });
 
-  function handleSubmit(mutate: any): (() => void) | undefined {
-    // throw new Error("Function not implemented.");
+  function handleSubmit() {
+    onSubmit.mutate(item._id);
   }
 
   return (
@@ -40,10 +46,7 @@ export default function OrderBS({ item }: any) {
       <OrderInfoCard item={item} />
       <View style={{ padding: 16, gap: 16 }}>
         <QuantitySelect value={qty} onChange={setQty} />
-        <CBButton
-          onPress={handleSubmit(onSubmit.mutate)}
-          loading={isSubmitting}
-        >
+        <CBButton onPress={handleSubmit} loading={isSubmitting}>
           Order
         </CBButton>
       </View>

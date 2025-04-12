@@ -6,17 +6,35 @@ import {
   View,
 } from "react-native";
 import RequestCard from "./RequestCard";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "@/axios";
 
 export default function MyRequestsTab() {
   const [refreshing, setRefreshing] = useState(false);
 
+  const { isPending, error, data, isFetching, refetch } = useQuery({
+    queryKey: ["myRequests"],
+    queryFn: async () => {
+      return await axios.get("/order/my", {
+        params: {
+          user_id: "6702957c2a68d28a33bd7fae",
+        },
+      });
+    },
+  });
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+    refetch();
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    console.log(data?.data);
+  }, [data]);
 
   return (
     <ScrollView
@@ -27,19 +45,9 @@ export default function MyRequestsTab() {
       }
       showsVerticalScrollIndicator={false}
     >
-      <RequestCard myOrderCard status="completed" />
-      <RequestCard myOrderCard status="in-process" />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
-      <RequestCard myOrderCard />
+      {data?.data.map((ele: any, idx: number) => (
+        <RequestCard data={ele} myOrderCard key={idx} status={ele.status} />
+      ))}
       <View style={{ height: 200 }} />
     </ScrollView>
   );

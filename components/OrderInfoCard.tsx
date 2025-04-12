@@ -24,7 +24,7 @@ export default function OrderInfoCard({
   onPress?: (event: GestureResponderEvent) => void;
 }) {
   const styles = useStyle(style);
-  console.log(item);
+  console.log("item:", item);
 
   return (
     <Pressable style={styles.card} onPress={onPress}>
@@ -37,7 +37,7 @@ export default function OrderInfoCard({
         }}
       >
         {status !== "new" && <StatusChip status={status} />}
-        {status === "in-process" && (
+        {status === "in process" && (
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
             <Ionicons
               style={{ color: "#e5e566", fontSize: 12 }}
@@ -60,7 +60,7 @@ export default function OrderInfoCard({
             {item?.counter ? item.counter : `Meal O Pedia`}
           </Text>
           <Text style={styles.itemText}>
-            {item?.name ? item.name : `Watermelon juice`}
+            {item?.item ? item.item : `Watermelon juice`}
           </Text>
         </View>
         <View>
@@ -157,13 +157,13 @@ const StatusChip = ({ status = "new" }: { status?: string }) => {
         borderRadius: 8,
         fontSize: 10,
         // borderColor: "#e5e566",
-        color: status === "in-process" ? "#e5e566" : "#00e6c4",
-        backgroundColor: status === "in-process" ? "#e5e56640" : "#00e6c440",
+        color: status === "in process" ? "#e5e566" : "#00e6c4",
+        backgroundColor: status === "in process" ? "#e5e56640" : "#00e6c440",
         borderWidth: 0,
       }}
       disabled
     >
-      {status === "in-process"
+      {status === "in process"
         ? "In Process"
         : status === "completed"
         ? "Completed"

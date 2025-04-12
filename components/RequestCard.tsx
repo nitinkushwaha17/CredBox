@@ -18,16 +18,17 @@ export default function RequestCard({
   myOrderCard?: boolean;
 }) {
   const bsref = useRef<BottomSheetModal>(null);
+  console.log(data);
 
   return (
     <>
       <OrderInfoCard
-        data={data}
+        item={data}
         status={status}
         onPress={() => bsref.current?.present()}
       />
       {myOrderCard ? (
-        status !== "in-process" && (
+        status !== "in process" && (
           <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
             <MyOrderBS status={status} />
           </CBBottomSheet>

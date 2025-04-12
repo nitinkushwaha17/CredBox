@@ -48,7 +48,7 @@ export default function AllRequestsTab() {
     },
   });
 
-  useEffect(() => console.log(data?.data), [data]);
+  useEffect(() => console.log("all requests:", data?.data), [data]);
 
   const setChip = useCallback(
     (idx: number) => {

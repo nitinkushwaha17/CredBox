@@ -7,7 +7,7 @@ import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
 import { useGlobalStore } from "@/store";
 
-export type OrderStatus = "new" | "in-process" | "completed";
+export type OrderStatus = "new" | "in process" | "completed";
 interface MyOrderBSProps {
   infoCardData?: any;
   status?: OrderStatus;

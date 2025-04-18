@@ -9,7 +9,7 @@ import { ThemeContext } from "@/contexts/ThemeContext";
 
 const snapPoints = ["25%", "50%"];
 
-export default function CompletedOrderCard() {
+export default function CompletedOrderCard({ item }: { item: any }) {
   const styles = useStyle(style);
   const bsref = useRef<BottomSheetModal>(null);
   return (
@@ -17,8 +17,8 @@ export default function CompletedOrderCard() {
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View>
           {/* <Text style={[styles.counterText, { fontSize: 8 }]}>2 hrs ago</Text> */}
-          <Text style={styles.counterText}>Meal O Pedia</Text>
-          <Text style={styles.itemText}>Watermelon juice</Text>
+          <Text style={styles.counterText}>{item.counter}</Text>
+          <Text style={styles.itemText}>{item.item}</Text>
         </View>
         <View
           style={{
@@ -27,11 +27,11 @@ export default function CompletedOrderCard() {
             alignItems: "center",
           }}
         >
-          <Text style={styles.amountText}>Rs. 100.00</Text>
+          <Text style={styles.amountText}>Rs {item.price}</Text>
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <MyOrderBS status="completed" />
+        <MyOrderBS status="completed" infoCardData={item} />
       </CBBottomSheet>
     </Pressable>
   );

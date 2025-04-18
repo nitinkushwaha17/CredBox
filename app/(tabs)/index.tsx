@@ -42,6 +42,18 @@ export default function Home() {
     },
   });
 
+  const getRecentlyCompletedOrdersQuery = useQuery({
+    queryKey: ["recentlyCompletedOrders"],
+    queryFn: async () => {
+      return await axios.get("/order/my", {
+        params: {
+          user_id: "6702957c2a68d28a33bd7fae",
+          num: 8,
+        },
+      });
+    },
+  });
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Appbar />
@@ -110,13 +122,9 @@ export default function Home() {
             horizontal
             contentContainerStyle={styles.contentContainer}
           >
-            <CompletedOrderCard />
-            <CompletedOrderCard />
-            <CompletedOrderCard />
-            <CompletedOrderCard />
-            <CompletedOrderCard />
-            <CompletedOrderCard />
-            <CompletedOrderCard />
+            {getRecentlyCompletedOrdersQuery.data?.data.map((item: any) => (
+              <CompletedOrderCard item={item} key={item.id} />
+            ))}
           </ScrollView>
         </View>
 

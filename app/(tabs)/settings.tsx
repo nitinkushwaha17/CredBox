@@ -4,6 +4,9 @@ import { Colors } from "@/constants/Colors";
 import { useGlobalStore } from "@/store";
 
 export default function Settings() {
+  const systemTheme = useGlobalStore((state) => state.systemTheme);
+  const toggleSystemTheme = useGlobalStore((state) => state.toggleSystemTheme);
+
   const theme = useGlobalStore((state) => state.theme);
   const setTheme = useGlobalStore((state) => state.setTheme);
 
@@ -30,9 +33,33 @@ export default function Settings() {
             fontSize: 16,
           }}
         >
+          Use system theme
+        </Text>
+        <Switch
+          value={systemTheme}
+          onChange={toggleSystemTheme}
+          thumbColor={"#6464ff"}
+          trackColor={{ true: "#6464ff55" }}
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            color: Colors[theme].text,
+            fontWeight: "600",
+            fontSize: 16,
+          }}
+        >
           Dark mode
         </Text>
         <Switch
+          disabled={systemTheme}
           value={theme == "dark"}
           onChange={() => setTheme(theme == "dark" ? "light" : "dark")}
           thumbColor={"#6464ff"}

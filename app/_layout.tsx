@@ -13,7 +13,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { Colors } from "@/constants/Colors";
 import LottieView from "lottie-react-native";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Splash from "./splash";
 import { ThemeContext } from "@/contexts/ThemeContext";
 import {
@@ -23,6 +23,7 @@ import {
 } from "@tanstack/react-query";
 import { useGlobalStore } from "@/store";
 import Main from "./main";
+import { useStyle } from "@/hooks/useStyle";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -44,6 +45,15 @@ export default function RootLayout() {
   useEffect(() => {
     console.log(useGlobalStore.persist.hasHydrated());
   }, []);
+
+  const styles = useStyle(style);
+  const colorScheme = useColorScheme();
+  const systemTheme = useGlobalStore((state) => state.systemTheme);
+  const setTheme = useGlobalStore((state) => state.setTheme);
+
+  useEffect(() => {
+    if (systemTheme) setTheme(colorScheme ?? "light");
+  });
 
   // const setUser = useGlobalStore((state) => state.setUser);
   // const user = useGlobalStore((state) => state.user);
@@ -70,7 +80,7 @@ export default function RootLayout() {
     <GestureHandlerRootView
       style={{
         flex: 1,
-        backgroundColor: Colors.dark.background,
+        backgroundColor: styles.background,
       }}
     >
       <QueryClientProvider client={queryClient}>
@@ -81,3 +91,16 @@ export default function RootLayout() {
     </GestureHandlerRootView>
   );
 }
+
+const style = (Colors: any) =>
+  StyleSheet.create({
+    contentContainer: {
+      gap: 12,
+      marginTop: 12,
+    },
+    heading: {
+      fontSize: 18,
+      color: Colors.text,
+      fontWeight: "600",
+    },
+  });

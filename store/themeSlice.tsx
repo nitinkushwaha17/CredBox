@@ -4,6 +4,8 @@ import { StateCreator } from "zustand";
 
 export interface ThemeSliceType {
   theme: themeType;
+  systemTheme: boolean;
+  toggleSystemTheme: () => void;
   setTheme: (theme: themeType) => void;
 }
 
@@ -14,5 +16,11 @@ export const themeSlice: StateCreator<
   ThemeSliceType
 > = (set) => ({
   theme: "light",
-  setTheme: (newTheme) => set({ theme: newTheme }),
+  systemTheme: true,
+  toggleSystemTheme: () =>
+    set((state) => ({ systemTheme: !state.systemTheme })),
+  setTheme: (newTheme) =>
+    set({
+      theme: newTheme,
+    }),
 });

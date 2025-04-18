@@ -6,7 +6,11 @@ export default function Main() {
   const theme = useGlobalStore((state) => state.theme);
 
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        navigationBarColor: Colors[theme].background,
+      }}
+    >
       <Stack.Screen
         name="(tabs)"
         options={{

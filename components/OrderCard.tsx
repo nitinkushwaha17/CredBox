@@ -15,7 +15,7 @@ import { useStyle } from "@/hooks/useStyle";
 
 const snapPoints = ["25%", "50%"];
 
-export default function OrderCard() {
+export default function OrderCard({ item }: { item: any }) {
   const bsref = useRef<BottomSheetModal>(null);
   const styles = useStyle(style);
 
@@ -23,8 +23,8 @@ export default function OrderCard() {
     <Pressable style={styles.box} onPress={() => bsref.current?.present()}>
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View>
-          <Text style={styles.counterText}>Meal O Pedia</Text>
-          <Text style={styles.itemText}>Watermelon juice</Text>
+          <Text style={styles.counterText}>{item.counter}</Text>
+          <Text style={styles.itemText}>{item.item}</Text>
         </View>
         <View
           style={{
@@ -33,7 +33,14 @@ export default function OrderCard() {
             alignItems: "center",
           }}
         >
-          <Text style={styles.amountText}>Rs. 100.00</Text>
+          <View
+            style={{
+              flexDirection: "column",
+            }}
+          >
+            <Text style={styles.amountText}>Rs {item.price}</Text>
+            <Text style={styles.todText}>{item.tod}</Text>
+          </View>
           <TouchableOpacity
             activeOpacity={0.6}
             onPress={() => bsref.current?.present()}
@@ -43,7 +50,7 @@ export default function OrderCard() {
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <OrderBS />
+        <OrderBS item={item} />
       </CBBottomSheet>
     </Pressable>
   );
@@ -72,6 +79,11 @@ const style = (Colors: any) =>
       fontSize: 12,
       fontWeight: "600",
       color: Colors.text,
+    },
+    todText: {
+      fontSize: 12,
+      color: "#00a6a4",
+      textTransform: "capitalize",
     },
     icon: {
       color: Colors.icon,

@@ -49,6 +49,20 @@ export default function Home() {
         params: {
           user_id: "6702957c2a68d28a33bd7fae",
           num: 8,
+          type: "completed",
+        },
+      });
+    },
+  });
+
+  const getRecentOrdersQuery = useQuery({
+    queryKey: ["recentOrders"],
+    queryFn: async () => {
+      return await axios.get("/order/my", {
+        params: {
+          user_id: "6702957c2a68d28a33bd7fae",
+          num: 8,
+          type: "recent",
         },
       });
     },
@@ -71,14 +85,17 @@ export default function Home() {
             horizontal
             contentContainerStyle={styles.contentContainer}
           >
+            (
+            {getRecentOrdersQuery.data?.data.map((item: any) => (
+              <OrderCard item={item} key={item.id} />
+            ))}
+            {/* <OrderCard />
             <OrderCard />
             <OrderCard />
             <OrderCard />
             <OrderCard />
             <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
+            <OrderCard /> */}
           </ScrollView>
         </View>
 

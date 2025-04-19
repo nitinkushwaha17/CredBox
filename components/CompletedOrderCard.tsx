@@ -16,18 +16,24 @@ export default function CompletedOrderCard({ item }: { item: any }) {
     <Pressable style={styles.box} onPress={() => bsref.current?.present()}>
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View>
-          {/* <Text style={[styles.counterText, { fontSize: 8 }]}>2 hrs ago</Text> */}
+          {/* <Text
+            style={[styles.counterText, { fontSize: 8, marginLeft: "auto" }]}
+          >
+            2 hrs ago
+          </Text> */}
           <Text style={styles.counterText}>{item.counter}</Text>
           <Text style={styles.itemText}>{item.item}</Text>
         </View>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: "column",
+            // justifyContent: "space-between",
+            // alignItems: "center",
+            // gap: 20,
           }}
         >
           <Text style={styles.amountText}>Rs {item.price}</Text>
+          <Text style={styles.todText}>{item.tod}</Text>
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
@@ -40,8 +46,10 @@ export default function CompletedOrderCard({ item }: { item: any }) {
 const style = (Colors: any) =>
   StyleSheet.create({
     box: {
-      height: 120,
-      width: 120,
+      minHeight: 120,
+      minWidth: 120,
+      maxWidth: 150,
+      maxHeight: 150,
       backgroundColor: Colors.onBackground,
       padding: 12,
       borderRadius: 8,
@@ -60,6 +68,13 @@ const style = (Colors: any) =>
       fontSize: 12,
       fontWeight: "600",
       color: Colors.text,
+    },
+    todText: {
+      fontSize: 12,
+      color: "#00a6a4",
+      // marginLeft: "auto",
+      textTransform: "capitalize",
+      // overflow: "scroll",
     },
     icon: {
       color: Colors.icon,

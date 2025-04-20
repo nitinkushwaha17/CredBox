@@ -85,17 +85,9 @@ export default function Home() {
             horizontal
             contentContainerStyle={styles.contentContainer}
           >
-            (
             {getRecentOrdersQuery.data?.data.map((item: any) => (
               <OrderCard item={item} key={item.id} />
             ))}
-            {/* <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard />
-            <OrderCard /> */}
           </ScrollView>
         </View>
 

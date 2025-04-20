@@ -60,7 +60,7 @@ export default function OrderInfoCard({
             {item?.counter ? item.counter : `Meal O Pedia`}
           </Text>
           <Text style={styles.itemText}>
-            {item?.item ? item.item : `Watermelon juice`}
+            {item?.name ? item.name : `Watermelon juice`}
           </Text>
         </View>
         <View>

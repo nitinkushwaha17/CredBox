@@ -33,7 +33,7 @@ export default function CounterInfo() {
   return (
     <ScrollView>
       {getAllItemsQuery.data?.data.map((item: any) => (
-        <ItemCard item={item} key={item._id} />
+        <ItemCard item={item} key={item.id} />
       ))}
       <View style={{ height: 200 }}></View>
     </ScrollView>
@@ -44,7 +44,7 @@ interface ItemCardProps {
   item: {
     name: string;
     price: number;
-    _id: string;
+    id: string;
   };
 }
 

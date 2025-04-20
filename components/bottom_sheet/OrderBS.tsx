@@ -38,7 +38,8 @@ export default function OrderBS({ item }: any) {
   });
 
   function handleSubmit() {
-    onSubmit.mutate(item._id);
+    // item_id for recently completed card
+    onSubmit.mutate(item.item_id ?? item.id);
   }
 
   return (

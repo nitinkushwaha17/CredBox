@@ -42,7 +42,7 @@ export default function CounterInfo() {
 
 interface ItemCardProps {
   item: {
-    name: string;
+    item: string;
     price: number;
     id: string;
   };
@@ -54,13 +54,15 @@ function ItemCard({ item }: ItemCardProps) {
   const styles = useStyle(style);
 
   const bsref = useRef<BottomSheetModal>(null);
+
+  console.log(item);
   return (
     <Pressable
       style={styles.cardContainer}
       onPress={() => bsref.current?.present()}
     >
       <Text style={[styles.itemCardText, { flex: 1, flexWrap: "wrap" }]}>
-        {item.name}
+        {item.item}
       </Text>
       <Text style={[styles.itemCardText, styles.priceText]}>
         Rs {item.price}

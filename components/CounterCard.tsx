@@ -23,9 +23,9 @@ export default function CounterCard({ counter }: { counter: any }) {
             objectFit: "cover",
           }}
         />
-        <View style={{ marginLeft: 12 }}>
+        <View style={{ marginLeft: 24 }}>
           <Text style={styles.name}>{counter.name}</Text>
-          <Text style={styles.order}>2 pending requests</Text>
+          {/* <Text style={styles.order}>2 pending requests</Text> */}
         </View>
       </View>
     </Link>
@@ -38,6 +38,7 @@ const style = (Colors: any) =>
       borderRadius: 8,
       flexDirection: "row",
       paddingVertical: 12,
+      alignItems: "center",
     },
     name: {
       fontSize: 16,

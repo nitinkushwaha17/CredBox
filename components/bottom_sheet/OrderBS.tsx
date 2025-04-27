@@ -9,12 +9,14 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "@/axios";
 import { useNavigation } from "expo-router";
 import { useGlobalStore } from "@/store";
+import { RefContext } from "@/contexts/RefContext";
 
 export default function OrderBS({ item }: any) {
   console.log(item);
   const [qty, setQty] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const navigation = useNavigation();
+  const ref = useContext(RefContext);
 
   const tod = useGlobalStore((state) => state.tod?.id);
 
@@ -30,7 +32,7 @@ export default function OrderBS({ item }: any) {
     },
     // TODO:show success message
     onSuccess: () => {
-      navigation.goBack();
+      ref.current.dismiss();
     },
     onSettled: () => {
       setIsSubmitting(false);

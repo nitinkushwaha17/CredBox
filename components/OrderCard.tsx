@@ -12,6 +12,7 @@ import OrderBS from "./bottom_sheet/OrderBS";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useContext, useRef } from "react";
 import { useStyle } from "@/hooks/useStyle";
+import { RefContext } from "@/contexts/RefContext";
 
 const snapPoints = ["25%", "50%"];
 
@@ -50,7 +51,9 @@ export default function OrderCard({ item }: { item: any }) {
         </View>
       </View>
       <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <OrderBS item={item} />
+        <RefContext.Provider value={bsref}>
+          <OrderBS item={item} />
+        </RefContext.Provider>
       </CBBottomSheet>
     </Pressable>
   );

@@ -21,11 +21,7 @@ export default function RequestCard({
 
   return (
     <>
-      <OrderInfoCard
-        item={data}
-        status={status}
-        onPress={() => bsref.current?.present()}
-      />
+      <OrderInfoCard item={data} onPress={() => bsref.current?.present()} />
       {myOrderCard ? (
         status !== "in process" && (
           <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
@@ -36,7 +32,9 @@ export default function RequestCard({
         )
       ) : (
         <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-          <RequestsBS infoCardData={data} />
+          <RefContext.Provider value={bsref}>
+            <RequestsBS infoCardData={data} />
+          </RefContext.Provider>
         </CBBottomSheet>
       )}
     </>

@@ -15,7 +15,6 @@ export default function OrderBS({ item }: any) {
   console.log(item);
   const [qty, setQty] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const navigation = useNavigation();
   const ref = useContext(RefContext);
 
   const tod = useGlobalStore((state) => state.tod?.id);
@@ -49,7 +48,11 @@ export default function OrderBS({ item }: any) {
       <OrderInfoCard item={item} />
       <View style={{ padding: 16, gap: 16 }}>
         <QuantitySelect value={qty} onChange={setQty} />
-        <CBButton onPress={handleSubmit} loading={isSubmitting}>
+        <CBButton
+          onPress={handleSubmit}
+          loading={isSubmitting}
+          disabled={isSubmitting}
+        >
           Order
         </CBButton>
       </View>

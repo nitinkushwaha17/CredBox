@@ -15,11 +15,9 @@ import { useStyle } from "@/hooks/useStyle";
 
 export default function OrderInfoCard({
   item,
-  status = "new",
   onPress,
 }: {
   item?: any;
-  status?: OrderStatus;
   onPress?: (event: GestureResponderEvent) => void;
 }) {
   const styles = useStyle(style);
@@ -35,8 +33,8 @@ export default function OrderInfoCard({
           alignItems: "center",
         }}
       >
-        {status !== "new" && <StatusChip status={status} />}
-        {status === "in process" && (
+        {item.status !== "new" && <StatusChip status={item.status} />}
+        {item.status === "in process" && (
           <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
             <Ionicons
               style={{ color: "#e5e566", fontSize: 12 }}

@@ -19,14 +19,11 @@ import axios from "@/axios";
 
 const initialCheckedArray = [true, false, false];
 const Options = ["All", "Accepted by me", "Completed by me"];
-const snapPoints = ["25%", "50%"];
 
 export default function AllRequestsTab() {
   const styles = useStyle(style);
 
   const [checked, setChecked] = useState<boolean[]>(initialCheckedArray);
-  // const bsref = useRef<BottomSheetModal>(null);
-
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
@@ -107,32 +104,16 @@ export default function AllRequestsTab() {
         }
         showsVerticalScrollIndicator={false}
       >
-        {data?.data.map((data: any, idx: number) => (
-          <RequestCard key={idx} data={data} />
-        ))}
-        {/* <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard /> */}
+        {data?.data.map(
+          (data: any, idx: number) =>
+            ((checked[0] && data.status !== "completed") ||
+              (checked[1] && data.status === "in process") ||
+              (checked[2] && data.status === "completed")) && (
+              <RequestCard key={idx} data={data} />
+            )
+        )}
         <View style={{ height: 200 }} />
       </ScrollView>
-      {/* <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-        <RequestsBS theme={theme} />
-      </CBBottomSheet> */}
     </View>
   );
 }

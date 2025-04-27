@@ -32,10 +32,6 @@ export default function MyRequestsTab() {
     }, 2000);
   }, []);
 
-  useEffect(() => {
-    console.log(data?.data);
-  }, [data]);
-
   return (
     <ScrollView
       style={{ padding: 16 }}

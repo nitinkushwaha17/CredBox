@@ -1,10 +1,10 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import CBBottomSheet from "./CBBottomSheet";
 import MyOrderBS, { OrderStatus } from "./bottom_sheet/MyOrderBS";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import OrderInfoCard from "./OrderInfoCard";
 import RequestsBS from "./bottom_sheet/RequestsBS";
-import { ThemeContext } from "@/contexts/ThemeContext";
+import { RefContext } from "@/contexts/RefContext";
 
 const snapPoints = ["25%", "50%"];
 
@@ -18,7 +18,6 @@ export default function RequestCard({
   myOrderCard?: boolean;
 }) {
   const bsref = useRef<BottomSheetModal>(null);
-  console.log(data);
 
   return (
     <>
@@ -30,7 +29,9 @@ export default function RequestCard({
       {myOrderCard ? (
         status !== "in process" && (
           <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
-            <MyOrderBS status={status} />
+            <RefContext.Provider value={bsref}>
+              <MyOrderBS status={status} infoCardData={data} />
+            </RefContext.Provider>
           </CBBottomSheet>
         )
       ) : (

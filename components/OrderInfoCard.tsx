@@ -6,13 +6,12 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useRef } from "react";
+import React from "react";
 import { Colors } from "@/constants/Colors";
 import Chip from "./Chip";
 import { Ionicons } from "@expo/vector-icons";
 import { OrderStatus } from "./bottom_sheet/MyOrderBS";
 import { useStyle } from "@/hooks/useStyle";
-import { themeType } from "@/app/_layout";
 
 export default function OrderInfoCard({
   item,
@@ -60,7 +59,7 @@ export default function OrderInfoCard({
             {item?.counter ? item.counter : `Meal O Pedia`}
           </Text>
           <Text style={styles.itemText}>
-            {item?.name ? item.name : `Watermelon juice`}
+            {item?.item ? item.item : `Watermelon juice`}
           </Text>
         </View>
         <View>

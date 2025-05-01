@@ -42,6 +42,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
       values.user_id = "6702957c2a68d28a33bd7fae";
       // values.is_custom = true;
       values.order_id = infoCardData.id;
+      setIsSubmitting(true);
       return axios.post("/order/accept", values);
     },
     // TODO:show success message
@@ -60,6 +61,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
         order_id: infoCardData.id,
         pin: pin,
       };
+      setIsSubmitting(true);
       return axios.post("/order/complete", values);
     },
     // TODO:show success message

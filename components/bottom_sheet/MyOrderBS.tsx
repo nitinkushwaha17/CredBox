@@ -59,13 +59,13 @@ export default function MyOrderBS({
         <>
           <View style={styles.qrContainer}>
             <QRCode
-              value="153235"
+              value={infoCardData.pin}
               backgroundColor={Colors[theme].background}
               color={Colors[theme].text}
               size={150}
             />
           </View>
-          <Text style={styles.pinText}>PIN: 153235</Text>
+          <Text style={styles.pinText}>PIN: {infoCardData.pin}</Text>
         </>
       ) : (
         <View style={{ padding: 16, gap: 16 }}>

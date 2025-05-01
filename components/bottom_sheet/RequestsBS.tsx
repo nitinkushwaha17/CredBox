@@ -22,13 +22,16 @@ import { RefContext } from "@/contexts/RefContext";
 export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
   const styles = useStyle(style);
   const ref = useContext(RefContext);
+  const isCompletedOrderEdit = infoCardData.status === "completed";
 
   const [disabled, setDisabled] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isAccepted, setIsAccepted] = useState<boolean>(
     infoCardData.status === "in process"
   );
-  const [pin, setPin] = useState<string>("");
+  const [pin, setPin] = useState<string>(
+    isCompletedOrderEdit ? infoCardData.pin : ""
+  );
 
   const handleInput = useCallback((text: string) => {
     setPin(text);
@@ -60,6 +63,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
         user_id: "6702957c2a68d28a33bd7fae",
         order_id: infoCardData.id,
         pin: pin,
+        edit: isCompletedOrderEdit,
       };
       setIsSubmitting(true);
       return axios.post("/order/complete", values);
@@ -77,7 +81,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
     <View>
       <OrderInfoCard item={infoCardData} />
       <View style={{ marginTop: 16, padding: 16, gap: 16 }}>
-        {isAccepted ? (
+        {isAccepted || isCompletedOrderEdit ? (
           <>
             <Text style={styles.text}>Order PIN</Text>
             <View style={{ gap: 8 }}>
@@ -94,7 +98,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
               loading={isSubmitting}
               onPress={onPinSubmit.mutate}
             >
-              Submit
+              {isCompletedOrderEdit ? "Submit" : "Update"}
             </CBButton>
           </>
         ) : (

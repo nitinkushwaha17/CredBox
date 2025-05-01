@@ -23,7 +23,7 @@ export default function RequestCard({
     <>
       <OrderInfoCard item={data} onPress={() => bsref.current?.present()} />
       {myOrderCard ? (
-        status !== "in process" && (
+        data.status !== "in process" && (
           <CBBottomSheet ref={bsref} snapPoints={snapPoints}>
             <RefContext.Provider value={bsref}>
               <MyOrderBS status={status} infoCardData={data} />

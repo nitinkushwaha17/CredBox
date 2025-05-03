@@ -98,7 +98,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
               loading={isSubmitting}
               onPress={onPinSubmit.mutate}
             >
-              {isCompletedOrderEdit ? "Submit" : "Update"}
+              {isCompletedOrderEdit ? "Update" : "Submit"}
             </CBButton>
           </>
         ) : (

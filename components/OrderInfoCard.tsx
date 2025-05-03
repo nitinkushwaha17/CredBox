@@ -12,6 +12,7 @@ import Chip from "./Chip";
 import { Ionicons } from "@expo/vector-icons";
 import { OrderStatus } from "./bottom_sheet/MyOrderBS";
 import { useStyle } from "@/hooks/useStyle";
+import Countdown from "./Countdown";
 
 export default function OrderInfoCard({
   item,
@@ -34,17 +35,7 @@ export default function OrderInfoCard({
         }}
       >
         {item.status !== "new" && <StatusChip status={item.status} />}
-        {item.status === "in process" && (
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-            <Ionicons
-              style={{ color: "#e5e566", fontSize: 12 }}
-              name="time-outline"
-            />
-            <Text style={{ color: "#e5e566", fontWeight: "600", fontSize: 12 }}>
-              3:55
-            </Text>
-          </View>
-        )}
+        {item.status === "in process" && <Countdown time={item.accepted_at} />}
       </View>
       <View
         style={{

@@ -29,6 +29,8 @@ export default function Main() {
           },
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: Colors[theme].text,
+          presentation: "modal",
+          animation: "slide_from_bottom",
         }}
       />
       <Stack.Screen
@@ -40,6 +42,8 @@ export default function Main() {
           },
           headerBackButtonDisplayMode: "minimal",
           headerTintColor: Colors[theme].text,
+          presentation: "modal",
+          animation: "slide_from_bottom",
         }}
       />
       <Stack.Screen name="+not-found" />

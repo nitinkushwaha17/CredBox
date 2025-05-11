@@ -6,7 +6,7 @@ import CBButton from "../CBButton";
 import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
 import { useGlobalStore } from "@/store";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import axios from "@/axios";
 import { RefContext } from "@/contexts/RefContext";
@@ -29,6 +29,8 @@ export default function MyOrderBS({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const queryClient = useQueryClient();
+
   const onSubmit: any = useMutation({
     mutationFn: () => {
       console.log(infoCardData.id);
@@ -42,6 +44,7 @@ export default function MyOrderBS({
     // TODO:show success message
     onSuccess: () => {
       ref.current.dismiss();
+      queryClient.invalidateQueries({ queryKey: ["myRequests"] });
     },
     onSettled: () => {
       setIsSubmitting(false);

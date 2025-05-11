@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
 import QuantitySelect from "../QuantitySelect";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/axios";
 import { useNavigation } from "expo-router";
 import { useGlobalStore } from "@/store";
@@ -16,8 +16,7 @@ export default function OrderBS({ item }: any) {
   const [qty, setQty] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const ref = useContext(RefContext);
-
-  const tod = useGlobalStore((state) => state.tod?.id);
+  const queryClient = useQueryClient();
 
   const onSubmit: any = useMutation({
     mutationFn: (itemId: any) => {
@@ -32,6 +31,7 @@ export default function OrderBS({ item }: any) {
     // TODO:show success message
     onSuccess: () => {
       ref.current.dismiss();
+      queryClient.invalidateQueries({ queryKey: ["recentOrders"] });
     },
     onSettled: () => {
       setIsSubmitting(false);

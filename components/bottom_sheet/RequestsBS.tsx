@@ -15,13 +15,14 @@ import CBButton from "../CBButton";
 import OrderInfoCard from "../OrderInfoCard";
 import { useStyle } from "@/hooks/useStyle";
 import { themeType } from "@/app/_layout";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/axios";
 import { RefContext } from "@/contexts/RefContext";
 
 export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
   const styles = useStyle(style);
   const ref = useContext(RefContext);
+  const queryClient = useQueryClient();
   const isCompletedOrderEdit = infoCardData.status === "completed";
 
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -51,6 +52,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
     // TODO:show success message
     onSuccess: () => {
       setIsAccepted(true);
+      queryClient.invalidateQueries({ queryKey: ["allRequests"] });
     },
     onSettled: () => {
       setIsSubmitting(false);
@@ -71,6 +73,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
     // TODO:show success message
     onSuccess: () => {
       ref.current.dismiss();
+      queryClient.invalidateQueries({ queryKey: ["allRequests"] });
     },
     onSettled: () => {
       setIsSubmitting(false);

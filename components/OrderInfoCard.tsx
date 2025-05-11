@@ -40,7 +40,9 @@ export default function OrderInfoCard({
           alignItems: "center",
         }}
       >
-        {item.status !== "new" && <StatusChip status={item.status} />}
+        {item.status && item.status !== "new" && (
+          <StatusChip status={item.status} />
+        )}
         {item.status === "in process" && <Countdown time={item.accepted_at} />}
       </View>
       <View

@@ -54,7 +54,7 @@ export default function MyOrderBS({
 
   return (
     <View>
-      <OrderInfoCard item={infoCardData} />
+      <OrderInfoCard item={infoCardData} noRipple />
       {status === "completed" ? (
         <>
           <View style={styles.qrContainer}>

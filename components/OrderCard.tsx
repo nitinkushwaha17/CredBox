@@ -21,7 +21,11 @@ export default function OrderCard({ item }: { item: any }) {
   const styles = useStyle(style);
 
   return (
-    <Pressable style={styles.box} onPress={() => bsref.current?.present()}>
+    <Pressable
+      style={styles.box}
+      onPress={() => bsref.current?.present()}
+      android_ripple={{ ...styles.ripple, foreground: true }}
+    >
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View>
           <Text style={styles.counterText}>{item.counter}</Text>
@@ -96,5 +100,8 @@ const style = (Colors: any) =>
       borderRadius: 5,
       paddingLeft: 2,
       paddingTop: 2,
+    },
+    ripple: {
+      color: Colors.rippleColor,
     },
   });

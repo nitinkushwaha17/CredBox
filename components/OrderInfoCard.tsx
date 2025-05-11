@@ -17,15 +17,21 @@ import Countdown from "./Countdown";
 export default function OrderInfoCard({
   item,
   onPress,
+  noRipple,
 }: {
   item?: any;
   onPress?: (event: GestureResponderEvent) => void;
+  noRipple?: boolean;
 }) {
   const styles = useStyle(style);
   console.log("item:", item);
 
   return (
-    <Pressable style={styles.card} onPress={onPress}>
+    <Pressable
+      style={styles.card}
+      onPress={onPress}
+      android_ripple={noRipple ? {} : { ...styles.ripple, foreground: true }}
+    >
       <View
         style={{
           marginBottom: 8,
@@ -190,5 +196,8 @@ const style = (Colors: any) =>
       color: "#00a6a4",
       marginLeft: "auto",
       textTransform: "capitalize",
+    },
+    ripple: {
+      color: Colors.rippleColor,
     },
   });

@@ -13,7 +13,11 @@ export default function CompletedOrderCard({ item }: { item: any }) {
   const styles = useStyle(style);
   const bsref = useRef<BottomSheetModal>(null);
   return (
-    <Pressable style={styles.box} onPress={() => bsref.current?.present()}>
+    <Pressable
+      style={styles.box}
+      onPress={() => bsref.current?.present()}
+      android_ripple={{ ...styles.ripple, foreground: true }}
+    >
       <View style={{ flex: 1, justifyContent: "space-between" }}>
         <View>
           {/* <Text
@@ -84,5 +88,8 @@ const style = (Colors: any) =>
       borderRadius: 5,
       paddingLeft: 2,
       paddingTop: 2,
+    },
+    ripple: {
+      color: Colors.rippleColor,
     },
   });

@@ -79,7 +79,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
 
   return (
     <View>
-      <OrderInfoCard item={infoCardData} />
+      <OrderInfoCard item={infoCardData} noRipple />
       <View style={{ marginTop: 16, padding: 16, gap: 16 }}>
         {isAccepted || isCompletedOrderEdit ? (
           <>

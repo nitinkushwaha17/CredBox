@@ -45,7 +45,7 @@ export default function OrderBS({ item }: any) {
 
   return (
     <View>
-      <OrderInfoCard item={item} />
+      <OrderInfoCard item={item} noRipple />
       <View style={{ padding: 16, gap: 16 }}>
         <QuantitySelect value={qty} onChange={setQty} />
         <CBButton

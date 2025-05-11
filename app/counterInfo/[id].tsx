@@ -60,6 +60,7 @@ function ItemCard({ item }: ItemCardProps) {
     <Pressable
       style={styles.cardContainer}
       onPress={() => bsref.current?.present()}
+      android_ripple={{ ...styles.ripple, foreground: true }}
     >
       <Text style={[styles.itemCardText, { flex: 1, flexWrap: "wrap" }]}>
         {item.item}
@@ -81,9 +82,9 @@ const style = (Colors: any) =>
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      paddingHorizontal: 16,
+      paddingHorizontal: 48,
       paddingVertical: 48,
-      marginHorizontal: 32,
+      // marginHorizontal: 32,
       borderBottomWidth: 1,
       borderBottomColor: Colors.onBackground,
       gap: 32,
@@ -98,5 +99,8 @@ const style = (Colors: any) =>
       fontWeight: "600",
       fontSize: 14,
       color: Colors.text2,
+    },
+    ripple: {
+      color: Colors.rippleColor,
     },
   });

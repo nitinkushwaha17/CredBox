@@ -69,7 +69,7 @@ export default function MyOrderBS({
         </>
       ) : (
         <View style={{ padding: 16, gap: 16 }}>
-          <CBButton>Update</CBButton>
+          {/* <CBButton>Update</CBButton> */}
           <CBButton
             containerStyle={{ backgroundColor: "red" }}
             onPress={handleSubmit}

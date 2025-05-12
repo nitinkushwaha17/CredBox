@@ -11,11 +11,6 @@ import { useGlobalStore } from "@/store";
 export default function Main() {
   const theme = useGlobalStore((state) => state.theme);
 
-  // const router = useRouter();
-
-  if (process.env.EXPO_PUBLIC_APP_VARIANT != "Development")
-    console.log("env dev: true");
-
   return (
     <Stack
       screenOptions={{

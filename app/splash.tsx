@@ -38,7 +38,7 @@ export default function Splash() {
   useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
-        setUser(data.data);
+        setUser(data.data.user);
       }, 2000);
     }
   }, [isSuccess]);

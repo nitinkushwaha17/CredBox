@@ -15,6 +15,7 @@ import { useNavigation } from "expo-router";
 import axios from "@/axios";
 import { useGlobalStore } from "@/store";
 import { useQuery } from "@tanstack/react-query";
+import { isDevEnv } from "@/utils";
 
 export default function Splash() {
   const styles = useStyle(style);
@@ -25,17 +26,17 @@ export default function Splash() {
   const ratio = win.width / 1248;
 
   const setUser = useGlobalStore((state) => state.setUser);
+  const url = isDevEnv() ? "/user/test" : "/user";
 
   const { isPending, error, data, isFetching, refetch, isSuccess } = useQuery({
     queryKey: ["allRequests"],
     queryFn: async () => {
-      return await axios.get("/user/test");
+      return await axios.get(url);
     },
   });
 
   useEffect(() => {
     if (isSuccess) {
-      // console.log("data: ", data.data);
       setTimeout(() => {
         setUser(data.data);
       }, 2000);

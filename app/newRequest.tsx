@@ -48,10 +48,12 @@ export default function newRequest() {
     },
   });
 
+  const currentUser = useCurrentUser();
+
   const onSubmit: any = useMutation({
     mutationFn: (values: any) => {
       setIsSubmitting(true);
-      values.user_id = useCurrentUser();
+      values.user_id = currentUser;
       values.is_custom = true;
       return axios.post("/order", values);
     },

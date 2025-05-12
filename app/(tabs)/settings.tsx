@@ -1,5 +1,5 @@
 import { StatusBar, StyleSheet, Switch, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Colors } from "@/constants/Colors";
 import { useGlobalStore } from "@/store";
 
@@ -10,8 +10,8 @@ export default function Settings() {
   const theme = useGlobalStore((state) => state.theme);
   const setTheme = useGlobalStore((state) => state.setTheme);
 
-  const user = useGlobalStore((state) => state.user);
-  const setuser = useGlobalStore((state) => state.setUser);
+  // const user = useGlobalStore((state) => state.user);
+  // const setuser = useGlobalStore((state) => state.setUser);
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 16, gap: 32, paddingTop: 24 }}>
@@ -66,7 +66,7 @@ export default function Settings() {
           trackColor={{ true: "#6464ff55" }}
         />
       </View>
-      <View
+      {/* <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
@@ -88,7 +88,7 @@ export default function Settings() {
           thumbColor={"#6464ff"}
           trackColor={{ true: "#6464ff55" }}
         />
-      </View>
+      </View> */}
     </View>
   );
 }

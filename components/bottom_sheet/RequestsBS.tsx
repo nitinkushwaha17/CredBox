@@ -25,6 +25,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
   const ref = useContext(RefContext);
   const queryClient = useQueryClient();
   const isCompletedOrderEdit = infoCardData.status === "completed";
+  const currentUser = useCurrentUser();
 
   const [disabled, setDisabled] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -43,7 +44,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
 
   const onAccept: any = useMutation({
     mutationFn: () => {
-      let values = { user_id: useCurrentUser(), order_id: infoCardData.id };
+      let values = { user_id: currentUser, order_id: infoCardData.id };
       setIsSubmitting(true);
       return axios.post("/order/accept", values);
     },
@@ -60,7 +61,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
   const onPinSubmit: any = useMutation({
     mutationFn: () => {
       let values = {
-        user_id: useCurrentUser(),
+        user_id: currentUser,
         order_id: infoCardData.id,
         pin: pin,
         edit: isCompletedOrderEdit,

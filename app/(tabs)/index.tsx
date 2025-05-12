@@ -26,17 +26,22 @@ export default function Home() {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
+    getAllCountersQuery.refetch();
+    getRecentlyCompletedOrdersQuery.refetch();
+    getRecentOrdersQuery.refetch();
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
   }, []);
+
+  const currentUser = useCurrentUser();
 
   const getAllCountersQuery = useQuery({
     queryKey: ["allCounters"],
     queryFn: async () => {
       return await axios.get("/counter/all", {
         params: {
-          user_id: useCurrentUser(),
+          user_id: currentUser,
           // cafeteria_id: "6779719d5215524013d69f60",
         },
       });
@@ -48,7 +53,7 @@ export default function Home() {
     queryFn: async () => {
       return await axios.get("/order/my", {
         params: {
-          user_id: useCurrentUser(),
+          user_id: currentUser,
           num: 8,
           type: "completed",
         },
@@ -61,7 +66,7 @@ export default function Home() {
     queryFn: async () => {
       return await axios.get("/order/my", {
         params: {
-          user_id: useCurrentUser(),
+          user_id: currentUser,
           num: 8,
           type: "recent",
         },

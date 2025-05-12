@@ -39,12 +39,14 @@ export default function AllRequestsTab() {
   const isDevEnv = process.env.EXPO_PUBLIC_APP_VARIANT == "Development";
   const user = useGlobalStore((state) => state.user);
 
+  const currentUser = useCurrentUser();
+
   const { isPending, error, data, isFetching, refetch } = useQuery({
     queryKey: ["allRequests"],
     queryFn: async () => {
       return await axios.get("/order/all", {
         params: {
-          user_id: useCurrentUser(),
+          user_id: currentUser,
         },
       });
     },

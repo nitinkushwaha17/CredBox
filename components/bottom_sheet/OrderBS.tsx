@@ -18,13 +18,14 @@ export default function OrderBS({ item }: any) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const ref = useContext(RefContext);
   const queryClient = useQueryClient();
+  const currentUser = useCurrentUser();
 
   const onSubmit: any = useMutation({
     mutationFn: (itemId: any) => {
       console.log("itemId:", itemId);
       setIsSubmitting(true);
       const data = {
-        user_id: useCurrentUser(),
+        user_id: currentUser,
         item_id: itemId,
       };
       return axios.post("/order", data);

@@ -13,13 +13,14 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function MyRequestsTab() {
   const [refreshing, setRefreshing] = useState(false);
+  const currentUser = useCurrentUser();
 
   const { isPending, error, data, isFetching, refetch } = useQuery({
     queryKey: ["myRequests"],
     queryFn: async () => {
       return await axios.get("/order/my", {
         params: {
-          user_id: useCurrentUser(),
+          user_id: currentUser,
         },
       });
     },

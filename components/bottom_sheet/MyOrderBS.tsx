@@ -29,6 +29,7 @@ export default function MyOrderBS({
   console.log("infocarddata:", infoCardData, ref);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const currentUser = useCurrentUser();
 
   const queryClient = useQueryClient();
 
@@ -37,7 +38,7 @@ export default function MyOrderBS({
       console.log(infoCardData.id);
       setIsSubmitting(true);
       const data = {
-        user_id: useCurrentUser(),
+        user_id: currentUser,
         order_id: infoCardData.id,
       };
       return axios.post("/order/delete", data);

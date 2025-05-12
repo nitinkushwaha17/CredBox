@@ -43,10 +43,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
 
   const onAccept: any = useMutation({
     mutationFn: () => {
-      let values = {};
-      values.user_id = useCurrentUser();
-      // values.is_custom = true;
-      values.order_id = infoCardData.id;
+      let values = { user_id: useCurrentUser(), order_id: infoCardData.id };
       setIsSubmitting(true);
       return axios.post("/order/accept", values);
     },

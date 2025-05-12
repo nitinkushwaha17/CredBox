@@ -18,6 +18,7 @@ import { themeType } from "@/app/_layout";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/axios";
 import { RefContext } from "@/contexts/RefContext";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
   const styles = useStyle(style);
@@ -43,7 +44,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
   const onAccept: any = useMutation({
     mutationFn: () => {
       let values = {};
-      values.user_id = "6702957c2a68d28a33bd7fae";
+      values.user_id = useCurrentUser();
       // values.is_custom = true;
       values.order_id = infoCardData.id;
       setIsSubmitting(true);
@@ -62,7 +63,7 @@ export default function RequestsBS({ infoCardData }: { infoCardData: any }) {
   const onPinSubmit: any = useMutation({
     mutationFn: () => {
       let values = {
-        user_id: "6702957c2a68d28a33bd7fae",
+        user_id: useCurrentUser(),
         order_id: infoCardData.id,
         pin: pin,
         edit: isCompletedOrderEdit,

@@ -1,7 +1,8 @@
-import { Tabs } from "expo-router";
+import { Redirect, router, Tabs, useRootNavigationState } from "expo-router";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useGlobalStore } from "@/store";
+import { useEffect } from "react";
 
 export default function TabLayout() {
   const theme = useGlobalStore((state) => state.theme);
@@ -52,18 +53,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
-              color={color}
-            />
-          ),
-        }}
-      /> */}
       <Tabs.Screen
         name="settings"
         options={{

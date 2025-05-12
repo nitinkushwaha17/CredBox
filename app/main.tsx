@@ -1,9 +1,20 @@
-import { Stack } from "expo-router";
+import {
+  Redirect,
+  Stack,
+  useRootNavigationState,
+  useRouter,
+  router,
+} from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { useGlobalStore } from "@/store";
 
 export default function Main() {
   const theme = useGlobalStore((state) => state.theme);
+
+  // const router = useRouter();
+
+  if (process.env.EXPO_PUBLIC_APP_VARIANT != "Development")
+    console.log("env dev: true");
 
   return (
     <Stack
@@ -47,6 +58,7 @@ export default function Main() {
         }}
       />
       <Stack.Screen name="+not-found" />
+      <Stack.Screen name="splash" />
     </Stack>
   );
 }

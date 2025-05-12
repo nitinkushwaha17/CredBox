@@ -10,6 +10,7 @@ import axios from "@/axios";
 import { useNavigation } from "expo-router";
 import { useGlobalStore } from "@/store";
 import { RefContext } from "@/contexts/RefContext";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function OrderBS({ item }: any) {
   console.log(item);
@@ -23,7 +24,7 @@ export default function OrderBS({ item }: any) {
       console.log("itemId:", itemId);
       setIsSubmitting(true);
       const data = {
-        user_id: "6702957c2a68d28a33bd7fae",
+        user_id: useCurrentUser(),
         item_id: itemId,
       };
       return axios.post("/order", data);

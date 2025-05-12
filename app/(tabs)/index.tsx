@@ -17,6 +17,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useStyle } from "@/hooks/useStyle";
 import { useQuery } from "@tanstack/react-query";
 import axios from "@/axios";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function Home() {
   const [refreshing, setRefreshing] = useState(false);
@@ -35,8 +36,8 @@ export default function Home() {
     queryFn: async () => {
       return await axios.get("/counter/all", {
         params: {
-          user_id: "6702957c2a68d28a33bd7fae",
-          cafeteria_id: "6779719d5215524013d69f60",
+          user_id: useCurrentUser(),
+          // cafeteria_id: "6779719d5215524013d69f60",
         },
       });
     },
@@ -47,7 +48,7 @@ export default function Home() {
     queryFn: async () => {
       return await axios.get("/order/my", {
         params: {
-          user_id: "6702957c2a68d28a33bd7fae",
+          user_id: useCurrentUser(),
           num: 8,
           type: "completed",
         },
@@ -60,7 +61,7 @@ export default function Home() {
     queryFn: async () => {
       return await axios.get("/order/my", {
         params: {
-          user_id: "6702957c2a68d28a33bd7fae",
+          user_id: useCurrentUser(),
           num: 8,
           type: "recent",
         },

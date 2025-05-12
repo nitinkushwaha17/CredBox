@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import axios from "@/axios";
 import { RefContext } from "@/contexts/RefContext";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export type OrderStatus = "new" | "in process" | "completed";
 interface MyOrderBSProps {
@@ -36,7 +37,7 @@ export default function MyOrderBS({
       console.log(infoCardData.id);
       setIsSubmitting(true);
       const data = {
-        user_id: "6702957c2a68d28a33bd7fae",
+        user_id: useCurrentUser(),
         order_id: infoCardData.id,
       };
       return axios.post("/order/delete", data);

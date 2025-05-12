@@ -9,6 +9,7 @@ import RequestCard from "./RequestCard";
 import { useState, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "@/axios";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function MyRequestsTab() {
   const [refreshing, setRefreshing] = useState(false);
@@ -18,7 +19,7 @@ export default function MyRequestsTab() {
     queryFn: async () => {
       return await axios.get("/order/my", {
         params: {
-          user_id: "6702957c2a68d28a33bd7fae",
+          user_id: useCurrentUser(),
         },
       });
     },

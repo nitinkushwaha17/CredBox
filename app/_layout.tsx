@@ -4,7 +4,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { createContext, useEffect, useState } from "react";
 import "react-native-reanimated";
@@ -13,8 +13,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { Colors } from "@/constants/Colors";
 import LottieView from "lottie-react-native";
-import { View, StyleSheet } from "react-native";
-import Splash from "./splash";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { ThemeContext } from "@/contexts/ThemeContext";
 import {
   QueryClient,
@@ -24,6 +23,8 @@ import {
 import { useGlobalStore } from "@/store";
 import Main from "./main";
 import { useStyle } from "@/hooks/useStyle";
+import Splash from "./splash";
+import { useColor } from "@/hooks/useColor";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -37,7 +38,7 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && useGlobalStore.persist.hasHydrated()) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
@@ -47,6 +48,7 @@ export default function RootLayout() {
   }, []);
 
   const styles = useStyle(style);
+  const Colors = useColor();
   const colorScheme = useColorScheme();
   const systemTheme = useGlobalStore((state) => state.systemTheme);
   const setTheme = useGlobalStore((state) => state.setTheme);
@@ -55,22 +57,8 @@ export default function RootLayout() {
     if (systemTheme) setTheme(colorScheme ?? "light");
   });
 
-  // const setUser = useGlobalStore((state) => state.setUser);
-  // const user = useGlobalStore((state) => state.user);
-  // const { isPending, error, data, isFetching, refetch } = useQuery({
-  //   queryKey: ["userReq"],
-  //   queryFn: async () => {
-  //     return await axios.get("/user/test");
-  //   },
-  // });
-  // // if(isPending) return null;
-
-  // useEffect(() => {
-  //   console.log(data?.data);
-  //   setUser(data?.data);
-  // }, [data]);
-
-  // if (!user) return null;
+  const user = useGlobalStore((state) => state.user);
+  console.log(user);
 
   if (!loaded || !useGlobalStore.persist.hasHydrated()) {
     return null;
@@ -80,12 +68,14 @@ export default function RootLayout() {
     <GestureHandlerRootView
       style={{
         flex: 1,
-        backgroundColor: styles.background,
+        backgroundColor: Colors.background,
       }}
     >
       <QueryClientProvider client={queryClient}>
         <BottomSheetModalProvider>
-          <Main />
+          <StatusBar backgroundColor={Colors.background} />
+          {user ? <Main /> : <Splash />}
+          {/* <Main /> */}
         </BottomSheetModalProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

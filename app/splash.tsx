@@ -3,35 +3,56 @@ import {
   Text,
   View,
   Image,
-  useColorScheme,
   Dimensions,
   ActivityIndicator,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ThemeContext } from "@/contexts/ThemeContext";
-import { Colors } from "@/constants/Colors";
 import LottieView from "lottie-react-native";
+import { useStyle } from "@/hooks/useStyle";
+import { useColor } from "@/hooks/useColor";
+import { useNavigation } from "expo-router";
+import axios from "@/axios";
+import { useGlobalStore } from "@/store";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Splash() {
+  const styles = useStyle(style);
+  const Colors = useColor();
   const insets = useSafeAreaInsets();
-  const colorScheme = useColorScheme();
 
   const win = Dimensions.get("window");
   const ratio = win.width / 1248;
 
+  const setUser = useGlobalStore((state) => state.setUser);
+
+  const { isPending, error, data, isFetching, refetch, isSuccess } = useQuery({
+    queryKey: ["allRequests"],
+    queryFn: async () => {
+      return await axios.get("/user/test");
+    },
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      // console.log("data: ", data.data);
+      setTimeout(() => {
+        setUser(data.data);
+      }, 2000);
+    }
+  }, [isSuccess]);
+
   return (
     <View
-      style={{
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
-        paddingLeft: insets.left,
-        paddingRight: insets.right,
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: Colors[colorScheme ?? "light"].background,
-      }}
+      style={[
+        {
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+        styles.container,
+      ]}
     >
       <Image
         style={{
@@ -68,13 +89,19 @@ export default function Splash() {
           transform: [{ translateY: Math.min(win.height, win.width, 500) / 2 }],
         }}
       >
-        <ActivityIndicator color={Colors[colorScheme ?? "light"].text} />
-        <Text style={{ color: Colors[colorScheme ?? "light"].text }}>
-          Registering your account
-        </Text>
+        <ActivityIndicator color="#6728ff" />
+        <Text style={{ color: Colors.text }}>Registering your account</Text>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const style = (Colors: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: Colors.background,
+    },
+  });

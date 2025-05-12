@@ -15,6 +15,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import TodSelect from "@/components/TodSelect";
 import QuantitySelect from "@/components/QuantitySelect";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function newRequest() {
   const navigation = useNavigation();
@@ -50,7 +51,7 @@ export default function newRequest() {
   const onSubmit: any = useMutation({
     mutationFn: (values: any) => {
       setIsSubmitting(true);
-      values.user_id = "6702957c2a68d28a33bd7fae";
+      values.user_id = useCurrentUser();
       values.is_custom = true;
       return axios.post("/order", values);
     },

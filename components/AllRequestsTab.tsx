@@ -16,6 +16,8 @@ import {
 } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import axios from "@/axios";
+import { useGlobalStore } from "@/store";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 const initialCheckedArray = [true, false, false];
 const Options = ["All", "Accepted by me", "Completed by me"];
@@ -34,12 +36,15 @@ export default function AllRequestsTab() {
     }, 2000);
   }, []);
 
+  const isDevEnv = process.env.EXPO_PUBLIC_APP_VARIANT == "Development";
+  const user = useGlobalStore((state) => state.user);
+
   const { isPending, error, data, isFetching, refetch } = useQuery({
     queryKey: ["allRequests"],
     queryFn: async () => {
       return await axios.get("/order/all", {
         params: {
-          user_id: "6702957c2a68d28a33bd7fae",
+          user_id: useCurrentUser(),
         },
       });
     },

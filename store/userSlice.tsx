@@ -8,6 +8,6 @@ export interface UserSliceType {
 export const userSlice: StateCreator<UserSliceType, [], [], UserSliceType> = (
   set
 ) => ({
-  user: "6702957c2a68d28a33bd7fae",
+  user: "",
   setUser: (user_id) => set({ user: user_id }),
 });

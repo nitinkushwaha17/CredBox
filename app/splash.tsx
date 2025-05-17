@@ -26,7 +26,7 @@ export default function Splash() {
   const ratio = win.width / 1248;
 
   const setUser = useGlobalStore((state) => state.setUser);
-  const url = isDevEnv() ? "/user/test" : "/user";
+  const url = isDevEnv() ? "/user/test" : "/user/register";
 
   const { isPending, error, data, isFetching, refetch, isSuccess } = useQuery({
     queryKey: ["allRequests"],
